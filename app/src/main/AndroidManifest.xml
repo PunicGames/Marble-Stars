@@ -13,9 +13,16 @@
         android:theme="@style/Theme.FlappyPhone"
         tools:targetApi="31">
         <activity
-            android:name=".AcelActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".GravityActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AcelActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

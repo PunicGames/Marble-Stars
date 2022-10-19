@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         var btn : Button = findViewById(R.id.mainButton)
         var context = this
         btn.setOnClickListener {
-            val intent = Intent(context, AcelActivity::class.java)
+            val intent = Intent(context, GravityActivity::class.java)
             startActivity(intent)
             finish()
         }

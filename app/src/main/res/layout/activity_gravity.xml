@@ -6,4 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".GravityActivity">
 
+    <TextView
+        android:id="@+id/textGravity"
+        android:layout_width="109dp"
+        android:layout_height="93dp"
+        android:text="TextView"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/dot"
+        android:layout_width="23dp"
+        android:layout_height="20dp"
+        app:srcCompat="@android:drawable/ic_notification_overlay"
+        tools:layout_editor_absoluteX="384dp"
+        tools:layout_editor_absoluteY="452dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
