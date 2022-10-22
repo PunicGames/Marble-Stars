@@ -5,18 +5,28 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 
 class GravityActivity : AppCompatActivity() {
 
     private lateinit var mSensorManager: SensorManager
     private lateinit var mGravitometer: Sensor
+    private lateinit var mVibrator: Vibrator
     var speed : Vector2D = Vector2D(0.0F, 0.0F)
     val TimeStep : Float =  0.4f
     val AirResistance : Float =  0.05f
+
+    private var width : Float = 0.0f
+    private var height : Float = 0.0f
+
     private var sensorEventListener = object : SensorEventListener {
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
@@ -41,12 +51,26 @@ class GravityActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gravity)
+
+        width = windowManager.defaultDisplay.width.toFloat()
+        height = windowManager.defaultDisplay.height.toFloat()
+
+        mVibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         mGravitometer = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
         if (mGravitometer != null)
             mSensorManager.registerListener(sensorEventListener, mGravitometer, SensorManager.SENSOR_DELAY_GAME)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun vibrate()
+    {
+        val vibration: VibrationEffect
+        vibration = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE)
+        mVibrator.cancel()
+        mVibrator.vibrate(vibration)
+    }
 
     fun move(view: View, x: Float, y:Float)
     {
@@ -58,18 +82,25 @@ class GravityActivity : AppCompatActivity() {
         speed += acel * TimeStep
         speed *= 0.99F
 
-        if (view.y > 1900 && speed.y > 0){
+        if (view.y > (height - view.height) && speed.y > 0){
             speed.y *= -1
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                vibrate()
         }
-        if (view.x > 1060 && speed.x > 0){
+        if (view.x > (width - view.width) && speed.x > 0){
             speed.x *= -1
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                vibrate()
         }
         if (view.y < 0 && speed.y < 0){
             speed.y *= -1
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                vibrate()
         }
         if (view.x < 0 && speed.x < 0){
             speed.x *= -1
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                vibrate()
         }
-
     }
 }
