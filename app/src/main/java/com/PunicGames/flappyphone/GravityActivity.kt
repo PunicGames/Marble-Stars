@@ -28,6 +28,9 @@ class GravityActivity : AppCompatActivity() {
     private var width : Float = 0.0f
     private var height : Float = 0.0f
 
+    private var stopXmovement : Boolean = false
+    private var stopYmovement : Boolean = false
+
     // Cajas
     private lateinit var textColision: TextView
     var arrBox = ArrayList<Box>()
@@ -58,7 +61,10 @@ class GravityActivity : AppCompatActivity() {
             for (i in 0..arrBox.size - 1){
                 if(arrBox[i].checkCollision(ball)){
                     resolveCollision(ball, arrBox[i].view, event.values[0], event.values[1])
-                    textColision.text = arrBox[0].checkCollision(findViewById(R.id.dot)).toString()
+                    //textColision.text = arrBox[0].checkCollision(findViewById(R.id.dot)).toString()
+                }else{
+                    stopXmovement = false;
+                    stopYmovement = false;
                 }
 
             }
@@ -85,7 +91,15 @@ class GravityActivity : AppCompatActivity() {
 
         // Boxes
         var box1 = Box(findViewById(R.id.box1))
+        var box2 = Box(findViewById(R.id.box2))
+        var box3 = Box(findViewById(R.id.box3))
+        var box4 = Box(findViewById(R.id.box4))
+        var box5 = Box(findViewById(R.id.box5))
         arrBox.add(box1)
+        arrBox.add(box2)
+        arrBox.add(box3)
+        arrBox.add(box4)
+        arrBox.add(box5)
 
     }
 
@@ -102,8 +116,10 @@ class GravityActivity : AppCompatActivity() {
     {
         var acel = Vector2D(x  * -1, y)
 
-        view.x += speed.x * TimeStep
-        view.y += speed.y * TimeStep
+        //if(!stopXmovement)
+            view.x += speed.x * TimeStep
+        //if(!stopYmovement)
+            view.y += speed.y * TimeStep
 
         speed += acel * TimeStep
         speed *= 0.99F
@@ -139,15 +155,28 @@ class GravityActivity : AppCompatActivity() {
         speed += acel * TimeStep
         speed *= 0.99F
 
+        var ballMargin = 10
+        var ballXcenter = ball.x + ball.width*0.5
+        var ballYcenter = ball.y + ball.height*0.5
 
-        if(ball.x + ball.width  > box.x + box.width){ // Bola chocando por la derecha de la caja
-            ball.x = box.x + box.width
-            speed.x *= -0.05f
-        }else if(ball.y - ball.height < box.y){       // Bola chocando por arriba de la caja
-            ball.y = box.y - ball.height
-            speed.y *= -0.05f
+
+        if((ballXcenter  >= box.x) && (ballYcenter  > box.y) && (ballYcenter < (box.y + box.height))){ // Bola chocando por la derecha de la caja
+            ball.x = box.x + box.width + ballMargin
+            stopXmovement = true;
+            speed.x *= -0.1f
         }
-
+        else if((ballYcenter < box.y) && (ballXcenter > box.x) &&(ballXcenter < box.x + box.width)){       // Bola chocando por arriba de la caja
+            ball.y = box.y - ball.height - ballMargin
+            speed.y *= -0.1f
+        }
+        else if((ballYcenter > box.y) && (ballXcenter > box.x) &&(ballXcenter < box.x + box.width)){                     // Bola chocando por abajo de la caja
+            ball.y = box.y + box.height + ballMargin;
+            speed.y *= -0.1f
+        }
+        else if((ballXcenter < box.x) && (ballYcenter > box.y) && (ballYcenter < (box.y + box.height))){                     // Bola chocando por la izquierda de la caja
+            ball.x = box.x - ball.width - ballMargin
+            speed.x *= -0.1f
+        }
 
 
     }
