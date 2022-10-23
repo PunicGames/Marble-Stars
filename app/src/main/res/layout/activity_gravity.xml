@@ -23,5 +23,30 @@
         android:layout_height="20dp"
         app:srcCompat="@android:drawable/ic_notification_overlay"
         tools:layout_editor_absoluteX="384dp"
-        tools:layout_editor_absoluteY="452dp" />
+        tools:layout_editor_absoluteY="452dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/box1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.207"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.903"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/textCollision"
+        android:layout_width="115dp"
+        android:layout_height="63dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintStart_toEndOf="@+id/box1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.878" />
 </androidx.constraintlayout.widget.ConstraintLayout>

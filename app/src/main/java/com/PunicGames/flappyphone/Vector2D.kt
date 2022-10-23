@@ -50,4 +50,10 @@ class Vector2D (
         this.y /= k
         return this
     }
+
+    fun negate(): Vector2D{
+        this.x = this.x * -1
+        this.y = this.y * -1
+        return this
+    }
 }
