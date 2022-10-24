@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.View
-import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -28,16 +27,25 @@ class GravityActivity : AppCompatActivity() {
     private var width : Float = 0.0f
     private var height : Float = 0.0f
 
-    private var stopXmovement : Boolean = false
-    private var stopYmovement : Boolean = false
-
     // Cajas
     private lateinit var textColision: TextView
     var arrBox = ArrayList<Box>()
 
+    // Bola
+    lateinit var ball : ImageView
+
+    //Puntuacion
+    private lateinit var scoreText: TextView
+    private  var score: Int = 0
+
+    // Objetivos
+    var arrObjectives = ArrayList<Box>()
+
+
     private var sensorEventListener = object : SensorEventListener {
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
+        @RequiresApi(Build.VERSION_CODES.O)
         override fun onSensorChanged(event: SensorEvent) {
             var mText: TextView = findViewById(R.id.textGravity)
 
@@ -54,22 +62,26 @@ class GravityActivity : AppCompatActivity() {
             }
             mText.text = str
 
-            move(findViewById(R.id.dot), event.values[0], event.values[1])
+            move(findViewById(R.id.ball), event.values[0], event.values[1])
 
-            // Compute collisions
-            var ball : ImageView = findViewById(R.id.dot)
+            // Compute collisions with walls
             for (i in 0..arrBox.size - 1){
                 if(arrBox[i].checkCollision(ball)){
                     resolveCollision(ball, arrBox[i].view, event.values[0], event.values[1])
-                    //textColision.text = arrBox[0].checkCollision(findViewById(R.id.dot)).toString()
-                }else{
-                    stopXmovement = false;
-                    stopYmovement = false;
+                    ball.x = findViewById<View?>(R.id.initPos).x
+                    ball.y = findViewById<View?>(R.id.initPos).y
+                    vibrate()
                 }
-
             }
-            // Texto de prueba FUNCIONA JEJE
-            //textColision.text = arrBox[0].printAABB()
+
+            // Compute collisions with objectives
+            for (i in 0..arrObjectives.size - 1){
+                if(arrObjectives[i].checkCollision(ball)){
+                    score += 1
+                    scoreText.text = "Score: " + score.toString()
+                    arrObjectives[i].view.alpha = 0.0f;
+                }
+            }
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,19 +100,41 @@ class GravityActivity : AppCompatActivity() {
 
         // Text
         textColision = findViewById(R.id.textCollision)
+        scoreText = findViewById(R.id.score)
+        scoreText.text = "Score: " + score.toString()
 
-        // Boxes
+        // Limits
         var box1 = Box(findViewById(R.id.box1))
         var box2 = Box(findViewById(R.id.box2))
         var box3 = Box(findViewById(R.id.box3))
         var box4 = Box(findViewById(R.id.box4))
-        var box5 = Box(findViewById(R.id.box5))
         arrBox.add(box1)
         arrBox.add(box2)
         arrBox.add(box3)
         arrBox.add(box4)
-        arrBox.add(box5)
+        // Walls
+        var wall1 = Box(findViewById(R.id.wall1))
+        var wall2 = Box(findViewById(R.id.wall2))
+        var wall3 = Box(findViewById(R.id.wall3))
+        var wall4 = Box(findViewById(R.id.wall4))
+        var wall5 = Box(findViewById(R.id.wall5))
+        var wall6 = Box(findViewById(R.id.wall6))
+        var wall7 = Box(findViewById(R.id.wall7))
+        var wall8 = Box(findViewById(R.id.wall8))
+        arrBox.add(wall1)
+        arrBox.add(wall2)
+        arrBox.add(wall3)
+        arrBox.add(wall4)
+        arrBox.add(wall5)
+        arrBox.add(wall6)
+        arrBox.add(wall7)
+        arrBox.add(wall8)
+        // Ball
+        ball = findViewById(R.id.ball)
 
+        // Objectives
+        var obj1 = Box(findViewById(R.id.obj1))
+        arrObjectives.add(obj1)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -116,10 +150,8 @@ class GravityActivity : AppCompatActivity() {
     {
         var acel = Vector2D(x  * -1, y)
 
-        //if(!stopXmovement)
-            view.x += speed.x * TimeStep
-        //if(!stopYmovement)
-            view.y += speed.y * TimeStep
+        view.x += speed.x * TimeStep
+        view.y += speed.y * TimeStep
 
         speed += acel * TimeStep
         speed *= 0.99F
@@ -162,20 +194,19 @@ class GravityActivity : AppCompatActivity() {
 
         if((ballXcenter  >= box.x) && (ballYcenter  > box.y) && (ballYcenter < (box.y + box.height))){ // Bola chocando por la derecha de la caja
             ball.x = box.x + box.width + ballMargin
-            stopXmovement = true;
-            speed.x *= -0.1f
+            speed.x *= -0.3f
         }
         else if((ballYcenter < box.y) && (ballXcenter > box.x) &&(ballXcenter < box.x + box.width)){       // Bola chocando por arriba de la caja
             ball.y = box.y - ball.height - ballMargin
-            speed.y *= -0.1f
+            speed.y *= -0.3f
         }
         else if((ballYcenter > box.y) && (ballXcenter > box.x) &&(ballXcenter < box.x + box.width)){                     // Bola chocando por abajo de la caja
             ball.y = box.y + box.height + ballMargin;
-            speed.y *= -0.1f
+            speed.y *= -0.3f
         }
         else if((ballXcenter < box.x) && (ballYcenter > box.y) && (ballYcenter < (box.y + box.height))){                     // Bola chocando por la izquierda de la caja
             ball.x = box.x - ball.width - ballMargin
-            speed.x *= -0.1f
+            speed.x *= -0.3f
         }
 
 

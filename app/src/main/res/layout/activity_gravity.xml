@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:rotation="0"
     tools:context=".GravityActivity">
 
     <TextView
@@ -31,71 +32,230 @@
         app:layout_constraintVertical_bias="0.878" />
 
     <ImageView
-        android:id="@+id/dot"
-        android:layout_width="23dp"
+        android:id="@+id/floor"
+        android:layout_width="446dp"
+        android:layout_height="804dp"
+        android:rotation="90"
+        android:scaleX="1.7"
+        android:scaleY="1.7"
+        app:layout_constraintBottom_toBottomOf="@+id/limits"
+        app:layout_constraintEnd_toEndOf="@+id/limits"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/limits"
+        app:layout_constraintTop_toTopOf="@+id/limits"
+        app:layout_constraintVertical_bias="0.356"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/ball"
+        android:layout_width="20dp"
         android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="@+id/limits"
+        app:layout_constraintTop_toTopOf="@+id/limits"
+        app:layout_constraintVertical_bias="0.147"
         app:srcCompat="@drawable/ball"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="384dp"
-        tools:layout_editor_absoluteY="452dp" />
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/initPos"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="@+id/limits"
+        app:layout_constraintTop_toTopOf="@+id/limits"
+        app:layout_constraintVertical_bias="0.147"
+        app:srcCompat="@color/cardview_shadow_end_color"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/box1"
-        android:layout_width="166dp"
-        android:layout_height="33dp"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="@color/cardview_shadow_end_color" />
+
+    <ImageView
+        android:id="@+id/box2"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976"
+        app:srcCompat="@color/cardview_shadow_end_color" />
+
+    <ImageView
+        android:id="@+id/box3"
+        android:layout_width="15dp"
+        android:layout_height="593dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.133"
-        app:srcCompat="@android:drawable/bottom_bar" />
-
-    <ImageView
-        android:id="@+id/box2"
-        android:layout_width="39dp"
-        android:layout_height="186dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.575"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/title_bar_tall" />
-
-    <ImageView
-        android:id="@+id/box3"
-        android:layout_width="39dp"
-        android:layout_height="186dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.215"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.341"
-        app:srcCompat="@android:drawable/title_bar_tall" />
+        app:layout_constraintVertical_bias="0.413"
+        app:srcCompat="@color/cardview_shadow_end_color" />
 
     <ImageView
         android:id="@+id/box4"
-        android:layout_width="27dp"
-        android:layout_height="138dp"
+        android:layout_width="15dp"
+        android:layout_height="593dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.563"
-        app:srcCompat="@android:drawable/title_bar_tall" />
+        app:layout_constraintVertical_bias="0.413"
+        app:srcCompat="@color/cardview_shadow_end_color" />
 
     <ImageView
-        android:id="@+id/box5"
-        android:layout_width="166dp"
-        android:layout_height="33dp"
+        android:id="@+id/limits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="90"
+        android:scaleX="1.7"
+        android:scaleY="1.7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32"
-        app:srcCompat="@android:drawable/bottom_bar" />
+        app:srcCompat="@drawable/limites" />
+
+    <ImageView
+        android:id="@+id/wall1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/box2"
+        app:layout_constraintEnd_toStartOf="@+id/box4"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toEndOf="@+id/box3"
+        app:layout_constraintTop_toBottomOf="@+id/box1"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/wall1" />
+
+    <ImageView
+        android:id="@+id/wall2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/box2"
+        app:layout_constraintEnd_toStartOf="@+id/box4"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toEndOf="@+id/box3"
+        app:layout_constraintTop_toBottomOf="@+id/wall1"
+        app:layout_constraintVertical_bias="0.18"
+        app:srcCompat="@drawable/wall1" />
+
+    <ImageView
+        android:id="@+id/wall3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/box2"
+        app:layout_constraintEnd_toStartOf="@+id/box4"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toEndOf="@+id/box3"
+        app:layout_constraintTop_toBottomOf="@+id/wall2"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/wall2" />
+
+    <ImageView
+        android:id="@+id/wall4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/box2"
+        app:layout_constraintEnd_toStartOf="@+id/box4"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toEndOf="@+id/box3"
+        app:layout_constraintTop_toBottomOf="@+id/wall3"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/wall1" />
+
+    <ImageView
+        android:id="@+id/wall5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/box2"
+        app:layout_constraintEnd_toStartOf="@+id/box4"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toEndOf="@+id/box3"
+        app:layout_constraintTop_toBottomOf="@+id/box1"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/wall1" />
+
+    <ImageView
+        android:id="@+id/wall6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/box2"
+        app:layout_constraintEnd_toStartOf="@+id/box4"
+        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintStart_toEndOf="@+id/box3"
+        app:layout_constraintTop_toBottomOf="@+id/wall5"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/wall1" />
+
+    <ImageView
+        android:id="@+id/wall7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/box2"
+        app:layout_constraintEnd_toStartOf="@+id/box4"
+        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintStart_toEndOf="@+id/box3"
+        app:layout_constraintTop_toBottomOf="@+id/wall8"
+        app:layout_constraintVertical_bias="0.892"
+        app:srcCompat="@drawable/wall2" />
+
+    <ImageView
+        android:id="@+id/wall8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/box2"
+        app:layout_constraintEnd_toStartOf="@+id/box4"
+        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintStart_toEndOf="@+id/box3"
+        app:layout_constraintTop_toBottomOf="@+id/wall6"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/wall1" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/limits"
+        app:layout_constraintEnd_toEndOf="@+id/limits"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toStartOf="@+id/floor"
+        app:layout_constraintTop_toTopOf="@+id/limits"
+        app:layout_constraintVertical_bias="0.961" />
+
+    <ImageView
+        android:id="@+id/obj1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:alpha="1"
+        app:layout_constraintBottom_toBottomOf="@+id/limits"
+        app:layout_constraintEnd_toEndOf="@+id/limits"
+        app:layout_constraintHorizontal_bias="0.677"
+        app:layout_constraintStart_toStartOf="@+id/limits"
+        app:layout_constraintTop_toTopOf="@+id/limits"
+        app:layout_constraintVertical_bias="0.551"
+        app:srcCompat="@color/purple_200"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
