@@ -7,90 +7,75 @@
 
     <Button
         android:id="@+id/back_button"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="297dp"
-        android:layout_marginBottom="669dp"
+        app:layout_constraintHorizontal_weight="1"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/lvl4_button"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/lvl1_button"
         android:layout_width="158dp"
         android:layout_height="73dp"
-        android:layout_marginStart="126dp"
-        android:layout_marginTop="164dp"
-        android:layout_marginEnd="127dp"
-        android:layout_marginBottom="40dp"
         android:text="Level 1"
         app:layout_constraintBottom_toTopOf="@+id/lvl2_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/lvl2_button"
         android:layout_width="158dp"
         android:layout_height="73dp"
-        android:layout_marginStart="126dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="127dp"
-        android:layout_marginBottom="40dp"
         android:text="level 2"
         app:layout_constraintBottom_toTopOf="@+id/lvl3_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lvl1_button" />
+        app:layout_constraintTop_toBottomOf="@+id/lvl1_button"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/lvl3_button"
         android:layout_width="158dp"
         android:layout_height="73dp"
-        android:layout_marginStart="126dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="127dp"
         android:text="level 3"
+        app:layout_constraintBottom_toTopOf="@+id/lvl4_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lvl2_button" />
+        app:layout_constraintTop_toBottomOf="@+id/lvl2_button"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/lvl4_button"
         android:layout_width="158dp"
         android:layout_height="73dp"
-        android:layout_marginStart="126dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="127dp"
-        android:layout_marginBottom="108dp"
         android:text="level 4"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lvl3_button" />
+        app:layout_constraintTop_toBottomOf="@+id/lvl3_button"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="147dp"
-        android:layout_marginBottom="116dp"
         android:text="LEVEL SELECTION"
         app:layout_constraintBottom_toTopOf="@+id/lvl1_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_button"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
