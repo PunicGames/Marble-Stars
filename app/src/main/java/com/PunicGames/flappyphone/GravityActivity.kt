@@ -5,6 +5,8 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.media.AsyncPlayer
+import android.media.MediaPlayer
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -42,6 +44,11 @@ class GravityActivity : AppCompatActivity() {
     var arrObjectives = ArrayList<Box>()
     var idxGoal : Int = 0
 
+    // Sound and music
+    private lateinit var collisionMediaPlayer: MediaPlayer
+    private lateinit var backgroundMediaPlayer: MediaPlayer
+    private lateinit var goalMediaPlayer: MediaPlayer
+
 
     private var sensorEventListener = object : SensorEventListener {
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
@@ -72,6 +79,11 @@ class GravityActivity : AppCompatActivity() {
                     ball.x = findViewById<View?>(R.id.initPos).x
                     ball.y = findViewById<View?>(R.id.initPos).y
                     vibrate()
+
+                    if(collisionMediaPlayer.isPlaying){
+                        collisionMediaPlayer.seekTo(0)
+                    }
+                    collisionMediaPlayer.start();
                 }
             }
 
@@ -82,6 +94,12 @@ class GravityActivity : AppCompatActivity() {
                     scoreText.text = "Score: " + score.toString()
                     arrObjectives[i].view.alpha = 0.0f;
                     idxGoal = SelectNewGoal(idxGoal);
+
+                    // Sounds
+                    if(goalMediaPlayer.isPlaying){
+                        goalMediaPlayer.seekTo(0)
+                    }
+                    goalMediaPlayer.start()
                 }
             }
         }
@@ -105,6 +123,21 @@ class GravityActivity : AppCompatActivity() {
         scoreText = findViewById(R.id.score)
         scoreText.text = "Score: " + score.toString()
 
+        //Sounds
+        if(!this::collisionMediaPlayer.isInitialized){
+            collisionMediaPlayer = MediaPlayer.create(this, R.raw.hit);
+        }
+        if(!this::goalMediaPlayer.isInitialized){
+            goalMediaPlayer = MediaPlayer.create(this, R.raw.goal);
+        }
+        if(!this::backgroundMediaPlayer.isInitialized){
+            backgroundMediaPlayer = MediaPlayer.create(this, R.raw.background);
+            backgroundMediaPlayer.start()
+            backgroundMediaPlayer.isLooping = true;
+            backgroundMediaPlayer.setVolume(0.2f, 0.2f);
+        }
+
+        // LEVEL CONSTRUCTION
         // Limits
         var box1 = Box(findViewById(R.id.box1))
         var box2 = Box(findViewById(R.id.box2))
@@ -230,5 +263,22 @@ class GravityActivity : AppCompatActivity() {
 
         arrObjectives[newGoalIdx].view.alpha = 1.0f;
         return newGoalIdx;
+    }
+
+
+    override fun onDestroy() {
+        if(this::collisionMediaPlayer.isInitialized){
+            collisionMediaPlayer.stop()
+            collisionMediaPlayer.release()
+        }
+        if(this::goalMediaPlayer.isInitialized){
+            goalMediaPlayer.stop()
+            goalMediaPlayer.release()
+        }
+        if(this::backgroundMediaPlayer.isInitialized){
+            backgroundMediaPlayer.stop()
+            backgroundMediaPlayer.release()
+        }
+        super.onDestroy()
     }
 }
