@@ -245,16 +245,58 @@
         app:layout_constraintVertical_bias="0.961" />
 
     <ImageView
-        android:id="@+id/obj1"
+        android:id="@+id/goal1"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:alpha="1"
         app:layout_constraintBottom_toBottomOf="@+id/limits"
         app:layout_constraintEnd_toEndOf="@+id/limits"
-        app:layout_constraintHorizontal_bias="0.677"
+        app:layout_constraintHorizontal_bias="0.872"
         app:layout_constraintStart_toStartOf="@+id/limits"
         app:layout_constraintTop_toTopOf="@+id/limits"
-        app:layout_constraintVertical_bias="0.551"
+        app:layout_constraintVertical_bias="0.825"
+        app:srcCompat="@color/purple_200"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/goal2"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:alpha="1"
+        app:layout_constraintBottom_toBottomOf="@+id/limits"
+        app:layout_constraintEnd_toEndOf="@+id/limits"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="@+id/limits"
+        app:layout_constraintTop_toTopOf="@+id/limits"
+        app:layout_constraintVertical_bias="0.146"
+        app:srcCompat="@color/purple_200"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/goal3"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:alpha="1"
+        app:layout_constraintBottom_toBottomOf="@+id/limits"
+        app:layout_constraintEnd_toEndOf="@+id/limits"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="@+id/limits"
+        app:layout_constraintTop_toTopOf="@+id/limits"
+        app:layout_constraintVertical_bias="0.489"
+        app:srcCompat="@color/purple_200"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/goal4"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:alpha="1"
+        app:layout_constraintBottom_toBottomOf="@+id/limits"
+        app:layout_constraintEnd_toEndOf="@+id/limits"
+        app:layout_constraintHorizontal_bias="0.291"
+        app:layout_constraintStart_toStartOf="@+id/limits"
+        app:layout_constraintTop_toTopOf="@+id/limits"
+        app:layout_constraintVertical_bias="0.825"
         app:srcCompat="@color/purple_200"
         tools:ignore="MissingConstraints" />
 

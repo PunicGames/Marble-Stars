@@ -40,6 +40,7 @@ class GravityActivity : AppCompatActivity() {
 
     // Objetivos
     var arrObjectives = ArrayList<Box>()
+    var idxGoal : Int = 0
 
 
     private var sensorEventListener = object : SensorEventListener {
@@ -76,10 +77,11 @@ class GravityActivity : AppCompatActivity() {
 
             // Compute collisions with objectives
             for (i in 0..arrObjectives.size - 1){
-                if(arrObjectives[i].checkCollision(ball)){
+                if(arrObjectives[i].checkCollision(ball) && idxGoal == i){
                     score += 1
                     scoreText.text = "Score: " + score.toString()
                     arrObjectives[i].view.alpha = 0.0f;
+                    idxGoal = SelectNewGoal(idxGoal);
                 }
             }
         }
@@ -133,8 +135,18 @@ class GravityActivity : AppCompatActivity() {
         ball = findViewById(R.id.ball)
 
         // Objectives
-        var obj1 = Box(findViewById(R.id.obj1))
-        arrObjectives.add(obj1)
+        var goal1 = Box(findViewById(R.id.goal1))
+        arrObjectives.add(goal1)
+        var goal2 = Box(findViewById(R.id.goal2))
+        arrObjectives.add(goal2)
+        var goal3 = Box(findViewById(R.id.goal3))
+        arrObjectives.add(goal3)
+        var goal4 = Box(findViewById(R.id.goal4))
+        arrObjectives.add(goal4)
+
+        goal2.view.alpha = 0.0f;
+        goal3.view.alpha = 0.0f;
+        goal4.view.alpha = 0.0f;
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -208,7 +220,15 @@ class GravityActivity : AppCompatActivity() {
             ball.x = box.x - ball.width - ballMargin
             speed.x *= -0.3f
         }
+    }
 
+    fun SelectNewGoal(lastGoal: Int): Int{
+        var newGoalIdx = (0..arrObjectives.size - 1).random()
+        while (newGoalIdx == lastGoal){
+            newGoalIdx = (0..arrObjectives.size - 1).random()
+        }
 
+        arrObjectives[newGoalIdx].view.alpha = 1.0f;
+        return newGoalIdx;
     }
 }
