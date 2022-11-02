@@ -27,8 +27,6 @@ class Level_4_Activity : AppCompatActivity() {
         override fun onSensorChanged(event: SensorEvent) {
 
             game?.onSensorChanged(event.values[0], event.values[1])
-
-
         }
     }
 
