@@ -1,9 +1,10 @@
 package com.PunicGames.flappyphone
 
+import android.icu.text.MeasureFormat.FormatWidth
 import android.view.View
 
 enum class Type {
-    wall, goal, hole,star
+    wall, goal, hole, star
 }
 
 class BoxCollider(
@@ -11,7 +12,9 @@ class BoxCollider(
     val xmin: Float,
     val xmax: Float,
     val ymin: Float,
-    val ymax: Float
+    val ymax: Float,
+    val width: Float = xmax - xmin,
+    val height: Float = ymax - ymin
 ) {
 
 
@@ -19,54 +22,38 @@ class BoxCollider(
     init {
     }
 
-    fun checkCollision(b: View): Boolean {
+    fun checkCollision(b: Ball): Boolean {
 
-        when (type) {
-            Type.wall -> {// BOX to BOX collision
-                var collisionX = (xmax >= b.x) && (b.x + b.width >= xmin)
-                var collisionY = (ymax >= b.y) && (b.y + b.height >= ymin)
-                return collisionX && collisionY
-            }
+        // SQUARE to SQUARE collision
+        //var collisionX = (xmax >= b.posX) && (b.posX + b.radio >= xmin)
+        //var collisionY = (ymax >= b.posY) && (b.posY + b.radio >= ymin)
 
-            Type.goal -> {
-                //Obtener puntos y finalizar partida
-            }
-            Type.star -> {
-                //Obtener puntos
+        // SQUARE to CIRCLE collision
+        var collisionX = (xmax >= b.posX + b.radio) && (b.posX - b.radio >= xmin)
+        var collisionY = (ymax >= b.posY + b.radio) && (b.posY - b.radio >= ymin)
 
-            }
-
-            Type.hole -> {
-                //Perder o bajar vida
-
-            }
-
-            else -> {
-                return true
-            }
-
-        }
-        /*
-        // BALL to BOX collision (NOT WORKING)
-        // Ball center
-        var ballCenter = Vector2D(b.x + (b.width/2), b.y + (b.height/2))
-        // AABB info
-        var aabbHalfExtents = Vector2D(view.width.toFloat() / 2, view.height.toFloat() / 2)
-        var aabbCenter = Vector2D(view.x + aabbHalfExtents.x, view.y + aabbHalfExtents.y)
-        // Difference vector between both centers
-        var difference = ballCenter.minus(aabbCenter)
-        var clampedX = clamp(difference.x, aabbHalfExtents.negate().x, aabbHalfExtents.x)
-        var clampedY = clamp(difference.y, aabbHalfExtents.negate().y, aabbHalfExtents.y)
-        var clamped = Vector2D(clampedX, clampedY)
-        // Add clamped value to aabb center and we get the value of box closest to circle
-        var closest = Vector2D(aabbCenter.plus(clamped).x, aabbCenter.plus(clamped).y)
-        // Retrieve vector between center circle and closest point AABB and check if length <= radius
-        difference = closest.minus(ballCenter)
-        return difference.magnitude < b.width
-        */
-
-        return false
+        return collisionX && collisionY
     }
+
+    /*
+    // BALL to BOX collision (NOT WORKING)
+    // Ball center
+    var ballCenter = Vector2D(b.x + (b.width/2), b.y + (b.height/2))
+    // AABB info
+    var aabbHalfExtents = Vector2D(view.width.toFloat() / 2, view.height.toFloat() / 2)
+    var aabbCenter = Vector2D(view.x + aabbHalfExtents.x, view.y + aabbHalfExtents.y)
+    // Difference vector between both centers
+    var difference = ballCenter.minus(aabbCenter)
+    var clampedX = clamp(difference.x, aabbHalfExtents.negate().x, aabbHalfExtents.x)
+    var clampedY = clamp(difference.y, aabbHalfExtents.negate().y, aabbHalfExtents.y)
+    var clamped = Vector2D(clampedX, clampedY)
+    // Add clamped value to aabb center and we get the value of box closest to circle
+    var closest = Vector2D(aabbCenter.plus(clamped).x, aabbCenter.plus(clamped).y)
+    // Retrieve vector between center circle and closest point AABB and check if length <= radius
+    difference = closest.minus(ballCenter)
+    return difference.magnitude < b.width
+    */
+
 
     fun printAABB(): String {
         return "Xmin: " + this.xmin + ". Xmax: " + this.xmax + ". Ymin: " + this.ymin + ". Ymax: " + this.ymax

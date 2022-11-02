@@ -6,10 +6,11 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
+import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 
 class Level_2_Activity : AppCompatActivity() {
     lateinit var mSensorManager: SensorManager
@@ -26,22 +27,7 @@ class Level_2_Activity : AppCompatActivity() {
         @RequiresApi(Build.VERSION_CODES.O)
         override fun onSensorChanged(event: SensorEvent) {
 
-
-            var str: String = ""
-            for (i in 0..2) {
-                when (i) {
-                    0 -> str += "x:\t"
-                    1 -> str += "y:\t"
-                    2 -> str += "z:\t"
-                }
-                str += event.values[i].toString()
-                if (i != 2)
-                    str += "\n"
-            }
-
-
             game?.onSensorChanged(event.values[0], event.values[1])
-
 
         }
     }
@@ -99,8 +85,9 @@ class Level_2_Activity : AppCompatActivity() {
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
-
+        game!!.layoutParams = ViewGroup.LayoutParams(1080, 1920)
         setContentView(game)
+
         level2.setBallStartPos(200f,200f)
 
     }

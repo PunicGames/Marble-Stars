@@ -186,38 +186,5 @@ class Level(
             canvas?.drawBitmap(cells[i].bitmap, cells[i].posX, cells[i].posY, null)
         }
     }
-    /*
-    fun resolveCollision(ball: View, box: View, x: Float, y:Float){
-        var acel = Vector2D(x  * -1, y)
-
-        ball.x += speed.x * TimeStep
-        ball.y += speed.y * TimeStep
-
-        speed += acel * TimeStep
-        speed *= 0.99F
-
-        var ballMargin = 10
-        var ballXcenter = ball.x + ball.width*0.5
-        var ballYcenter = ball.y + ball.height*0.5
-
-
-        if((ballXcenter  >= box.x) && (ballYcenter  > box.y) && (ballYcenter < (box.y + box.height))){ // Bola chocando por la derecha de la caja
-            ball.x = box.x + box.width + ballMargin
-            speed.x *= -0.3f
-        }
-        else if((ballYcenter < box.y) && (ballXcenter > box.x) &&(ballXcenter < box.x + box.width)){       // Bola chocando por arriba de la caja
-            ball.y = box.y - ball.height - ballMargin
-            speed.y *= -0.3f
-        }
-        else if((ballYcenter > box.y) && (ballXcenter > box.x) &&(ballXcenter < box.x + box.width)){                     // Bola chocando por abajo de la caja
-            ball.y = box.y + box.height + ballMargin;
-            speed.y *= -0.3f
-        }
-        else if((ballXcenter < box.x) && (ballYcenter > box.y) && (ballYcenter < (box.y + box.height))){                     // Bola chocando por la izquierda de la caja
-            ball.x = box.x - ball.width - ballMargin
-            speed.x *= -0.3f
-        }
-    }
-    */
 
 }
