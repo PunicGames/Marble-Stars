@@ -2,22 +2,46 @@ package com.PunicGames.flappyphone
 
 import android.view.View
 
-class Box (v : View){
-    var view : View
-    val xmin : Float
-        get() = view.x
-    val xmax : Float
-        get() = view.x + view.width
-    val ymin : Float
-        get() = view.y
-    val ymax : Float
-        get() = view.y + view.height
+enum class Type {
+    wall, goal, hole
+}
+
+class BoxCollider(
+    val type: Type,
+    val xmin: Float,
+    val xmax: Float,
+    val ymin: Float,
+    val ymax: Float
+) {
+
+
 
     init {
-        view = v
     }
 
-    fun checkCollision(b: View): Boolean{
+    fun checkCollision(b: View): Boolean {
+
+        when (type) {
+            Type.wall -> {// BOX to BOX collision
+                var collisionX = (xmax >= b.x) && (b.x + b.width >= xmin)
+                var collisionY = (ymax >= b.y) && (b.y + b.height >= ymin)
+                return collisionX && collisionY
+            }
+
+            Type.goal -> {
+                //Obtener puntos
+            }
+
+            Type.hole -> {
+                //Perder o bajar vida
+
+            }
+
+            else -> {
+                return true
+            }
+
+        }
         /*
         // BALL to BOX collision (NOT WORKING)
         // Ball center
@@ -37,38 +61,36 @@ class Box (v : View){
         return difference.magnitude < b.width
         */
 
-        // BOX to BOX collision
-        var collisionX = (xmax >= b.x) && (b.x + b.width >= xmin)
-        var collisionY = (ymax >= b.y) && (b.y + b.height >= ymin)
-        return collisionX && collisionY
+        return false
     }
 
-    fun printAABB(): String{
+    fun printAABB(): String {
         return "Xmin: " + this.xmin + ". Xmax: " + this.xmax + ". Ymin: " + this.ymin + ". Ymax: " + this.ymax
     }
 
-    fun printInfo(): String{
-        return "v.x: " + this.view.x + ". v.y: " + this.view.y + ". width: " + this.view.width + ". height: " + view.height
-    }
-
-    fun print() : String{
+    /*
+        fun printInfo(): String{
+            return "v.x: " + this.view.x + ". v.y: " + this.view.y + ". width: " + this.view.width + ". height: " + view.height
+        }
+    */
+    fun print(): String {
         return xmin.toString()
     }
 
 
     // Funciones de apoyo (Debería ir en una clase Utils)
-    fun clamp(value: Float, min: Float, max:Float): Float{
+    fun clamp(value: Float, min: Float, max: Float): Float {
         return max(min, min(max, value))
     }
 
-    fun max (min:Float, max:Float):Float{
-        if(min > max)
+    fun max(min: Float, max: Float): Float {
+        if (min > max)
             return min
         return max
     }
 
-    fun min (min:Float, max:Float):Float{
-        if(min < max)
+    fun min(min: Float, max: Float): Float {
+        if (min < max)
             return min
         return max
     }

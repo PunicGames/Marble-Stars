@@ -5,7 +5,6 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.media.AsyncPlayer
 import android.media.MediaPlayer
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +15,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-
+/*
 class GravityActivity : AppCompatActivity() {
 
     private lateinit var mSensorManager: SensorManager
@@ -31,7 +30,7 @@ class GravityActivity : AppCompatActivity() {
 
     // Cajas
     private lateinit var textColision: TextView
-    var arrBox = ArrayList<Box>()
+    var arrBox = ArrayList<BoxCollider>()
 
     // Bola
     lateinit var ball : ImageView
@@ -41,7 +40,7 @@ class GravityActivity : AppCompatActivity() {
     private  var score: Int = 0
 
     // Objetivos
-    var arrObjectives = ArrayList<Box>()
+    var arrObjectives = ArrayList<BoxCollider>()
     var idxGoal : Int = 0
 
     // Sound and music
@@ -139,23 +138,23 @@ class GravityActivity : AppCompatActivity() {
 
         // LEVEL CONSTRUCTION
         // Limits
-        var box1 = Box(findViewById(R.id.box1))
-        var box2 = Box(findViewById(R.id.box2))
-        var box3 = Box(findViewById(R.id.box3))
-        var box4 = Box(findViewById(R.id.box4))
+        var box1 = BoxCollider(findViewById(R.id.box1), 0.0f, 0.0f, 0.0f)
+        var box2 = BoxCollider(findViewById(R.id.box2), 0.0f, 0.0f, 0.0f)
+        var box3 = BoxCollider(findViewById(R.id.box3), 0.0f, 0.0f, 0.0f)
+        var box4 = BoxCollider(findViewById(R.id.box4), 0.0f, 0.0f, 0.0f)
         arrBox.add(box1)
         arrBox.add(box2)
         arrBox.add(box3)
         arrBox.add(box4)
         // Walls
-        var wall1 = Box(findViewById(R.id.wall1))
-        var wall2 = Box(findViewById(R.id.wall2))
-        var wall3 = Box(findViewById(R.id.wall3))
-        var wall4 = Box(findViewById(R.id.wall4))
-        var wall5 = Box(findViewById(R.id.wall5))
-        var wall6 = Box(findViewById(R.id.wall6))
-        var wall7 = Box(findViewById(R.id.wall7))
-        var wall8 = Box(findViewById(R.id.wall8))
+        var wall1 = BoxCollider(findViewById(R.id.wall1), 0.0f, 0.0f, 0.0f)
+        var wall2 = BoxCollider(findViewById(R.id.wall2), 0.0f, 0.0f, 0.0f)
+        var wall3 = BoxCollider(findViewById(R.id.wall3), 0.0f, 0.0f, 0.0f)
+        var wall4 = BoxCollider(findViewById(R.id.wall4), 0.0f, 0.0f, 0.0f)
+        var wall5 = BoxCollider(findViewById(R.id.wall5), 0.0f, 0.0f, 0.0f)
+        var wall6 = BoxCollider(findViewById(R.id.wall6), 0.0f, 0.0f, 0.0f)
+        var wall7 = BoxCollider(findViewById(R.id.wall7), 0.0f, 0.0f, 0.0f)
+        var wall8 = BoxCollider(findViewById(R.id.wall8), 0.0f, 0.0f, 0.0f)
         arrBox.add(wall1)
         arrBox.add(wall2)
         arrBox.add(wall3)
@@ -168,13 +167,13 @@ class GravityActivity : AppCompatActivity() {
         ball = findViewById(R.id.ball)
 
         // Objectives
-        var goal1 = Box(findViewById(R.id.goal1))
+        var goal1 = BoxCollider(findViewById(R.id.goal1), 0.0f, 0.0f, 0.0f)
         arrObjectives.add(goal1)
-        var goal2 = Box(findViewById(R.id.goal2))
+        var goal2 = BoxCollider(findViewById(R.id.goal2), 0.0f, 0.0f, 0.0f)
         arrObjectives.add(goal2)
-        var goal3 = Box(findViewById(R.id.goal3))
+        var goal3 = BoxCollider(findViewById(R.id.goal3), 0.0f, 0.0f, 0.0f)
         arrObjectives.add(goal3)
-        var goal4 = Box(findViewById(R.id.goal4))
+        var goal4 = BoxCollider(findViewById(R.id.goal4), 0.0f, 0.0f, 0.0f)
         arrObjectives.add(goal4)
 
         goal2.view.alpha = 0.0f;
@@ -282,3 +281,5 @@ class GravityActivity : AppCompatActivity() {
         super.onDestroy()
     }
 }
+*/
+ 

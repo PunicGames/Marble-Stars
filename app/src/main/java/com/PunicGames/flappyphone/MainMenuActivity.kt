@@ -3,45 +3,23 @@ package com.PunicGames.flappyphone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.SurfaceView
 import android.widget.Button
 
-
-class LVL2_test_activity : AppCompatActivity() {
-
+class MainMenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.level2_layout)
-
-        //var s_view : SurfaceView = findViewById(R.id.surfaceView)
-        //s_view.holder.addCallback(this)
-
-        //s_view.isFocusable
 
 
+        setContentView(R.layout.activity_main)
 
-
-
-
-
-
-
-
-
-        var back : Button = findViewById(R.id.back_button)
+        var btn : Button = findViewById(R.id.mainButton)
         var context = this
-        back.setOnClickListener {
+        btn.setOnClickListener {
             //val intent = Intent(context, GravityActivity::class.java)
             //val intent = Intent(context, TestCellsActivity::class.java)
             val intent = Intent(context, LevelSelectionActivity::class.java)
             startActivity(intent)
             finish()
         }
-
-
     }
-
-
 }
-
-
