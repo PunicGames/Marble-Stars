@@ -23,6 +23,7 @@ class GameView(context: Context, val vibrator: Vibrator) :
     private lateinit var collisionMediaPlayer: MediaPlayer
     private lateinit var backgroundMediaPlayer: MediaPlayer
     private lateinit var goalMediaPlayer: MediaPlayer
+    private lateinit var rollingBallPlayer: MediaPlayer
 
 
     //Ball
@@ -50,6 +51,12 @@ class GameView(context: Context, val vibrator: Vibrator) :
             backgroundMediaPlayer.isLooping = true;
             backgroundMediaPlayer.setVolume(0.2f, 0.2f);
         }
+        if(!this::rollingBallPlayer.isInitialized){
+            rollingBallPlayer = MediaPlayer.create(context, R.raw.rolling);
+            rollingBallPlayer.start();
+            rollingBallPlayer.isLooping = true;
+            rollingBallPlayer.setVolume(0.0f, 0.0f);
+        }
 
 
         ballPaint.color = Color.RED
@@ -74,8 +81,21 @@ class GameView(context: Context, val vibrator: Vibrator) :
         ball.speed += acel * TimeStep
         ball.speed *= 0.99F
 
-        checkCollisions()
+        // Change sound
+        var factorX = ball.speed.x
+        var factorY = ball.speed.y
+        if(factorX < 0){
+            factorX *= -1;
+        }
+        if(factorY < 0){
+            factorY *= -1;
+        }
+        var factor = (factorX + factorY) / 2
+        rollingBallPlayer.setVolume(factor * 0.05f, factor * 0.05f);
 
+
+        // Collision
+        checkCollisions()
 
     }
     fun resolveCollision(ball: Ball, box: BoxCollider, x: Float, y:Float){
@@ -160,4 +180,24 @@ class GameView(context: Context, val vibrator: Vibrator) :
         vibrator.cancel()
         vibrator.vibrate(vibration)
     }
+
+    fun DeactivateSounds(){
+        if(this::collisionMediaPlayer.isInitialized){
+            collisionMediaPlayer.stop()
+            collisionMediaPlayer.release()
+        }
+        if(this::goalMediaPlayer.isInitialized){
+            goalMediaPlayer.stop()
+            goalMediaPlayer.release()
+        }
+        if(this::rollingBallPlayer.isInitialized){
+            rollingBallPlayer.stop()
+            rollingBallPlayer.release()
+        }
+        if(this::backgroundMediaPlayer.isInitialized){
+            backgroundMediaPlayer.stop()
+            backgroundMediaPlayer.release()
+        }
+    }
+
 }

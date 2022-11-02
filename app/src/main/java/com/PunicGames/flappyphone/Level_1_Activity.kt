@@ -6,13 +6,13 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 
-class Level_2_Activity : AppCompatActivity() {
+class Level_1_Activity : AppCompatActivity() {
     lateinit var mSensorManager: SensorManager
     lateinit var mGravitometer: Sensor
     lateinit var mVibrator: Vibrator
@@ -56,7 +56,7 @@ class Level_2_Activity : AppCompatActivity() {
         )
 
         //Level initialization
-        var level2: Level = Level(
+        var level1: Level = Level(
             game!!,
             18,
             32,
@@ -69,58 +69,45 @@ class Level_2_Activity : AppCompatActivity() {
             R.drawable.hole
         )
 
-        game!!.level = level2
+        game!!.level = level1
 
         //DISEÑA  TU NIVEL AQUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // Meta
-        level2.setGoal(9, 1)
+        level1.setGoal(2, 15)
 
         // Limites
-        level2.setTWallBlock(0, 0, 1, 32)
-        level2.setTWallBlock(17, 0, 18, 32)
-        level2.setTWallBlock(0, 0, 18, 1)
-        level2.setTWallBlock(0, 31, 18, 32)
+        level1.setTWallBlock(0, 0, 1, 32)
+        level1.setTWallBlock(17, 0, 18, 32)
+        level1.setTWallBlock(0, 0, 18, 1)
+        level1.setTWallBlock(0, 31, 18, 32)
 
         // Paredes Horizontales
-        level2.setTWallBlock(1, 4, 15, 5)
-        level2.setTWallBlock(1, 8, 15, 9)
-        level2.setTWallBlock(1, 8, 15, 9)
-        level2.setTWallBlock(1, 8, 15, 9)
-        level2.setTWallBlock(5, 12, 7, 13)
-        level2.setTWallBlock(1, 11, 2, 12)
-        level2.setTWallBlock(12, 11, 17, 12)
-        level2.setTWallBlock(3, 20, 9, 21)
-        level2.setTWallBlock(1, 27, 10, 28)
-
+        level1.setTWallBlock(1, 4, 3, 5)
+        level1.setTWallBlock(3, 8, 5, 9)
+        level1.setTWallBlock(1, 12, 8, 13)
+        level1.setTWallBlock(1, 16, 5, 17)
+        level1.setTWallBlock(3, 28, 13, 29)
+        level1.setTWallBlock(11, 11, 14, 12)
+        level1.setTWallBlock(8, 17, 12, 18)
+        level1.setTWallBlock(11, 21, 14, 22)
 
         // Paredes Verticales
-        level2.setTWallBlock(4, 3, 5, 4)
-        level2.setTWallBlock(4, 9, 5, 18)
-        level2.setTWallBlock(13, 3, 14, 4)
-        level2.setTWallBlock(7, 15, 15, 16)
-        level2.setTWallBlock(9, 9, 10, 24)
-        level2.setTWallBlock(3, 17, 4, 18)
-        level2.setTWallBlock(3, 21, 4, 24)
-        level2.setTWallBlock(6, 24, 7, 27)
-        level2.setTWallBlock(13, 18, 14, 31)
-        level2.setTWallBlock(12, 21, 13, 23)
-        level2.setTWallBlock(11, 30, 13, 31)
+        level1.setTWallBlock(5, 1, 6, 10)
+        level1.setTWallBlock(8, 3, 9, 26)
+        level1.setTWallBlock(4, 16, 5, 26)
+        level1.setTWallBlock(13, 26, 14, 31)
+        level1.setTWallBlock(11, 3, 12, 12)
+        level1.setTWallBlock(14, 1, 15, 23)
+        level1.setTWallBlock(16, 27, 17, 28)
 
         // Estrellas
-        level2.setStar(6, 1)
-        level2.setStar(9, 5)
-        level2.setStar(29, 2)
-        level2.setStar(30, 15)
+        level1.setStar(30, 16)
+        level1.setStar(29, 11)
+        level1.setStar(9, 12)
+        level1.setStar(15, 1)
 
         // Agujeros
-        level2.setHole(1, 8)
-        level2.setHole(5, 11)
-        level2.setHole(7, 4)
-        level2.setHole(11, 5)
-        level2.setHole(14, 10)
-        level2.setHole(26, 1)
-        level2.setHole(29, 6)
-        level2.setHole(25, 15)
+
 
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
@@ -128,7 +115,7 @@ class Level_2_Activity : AppCompatActivity() {
         game!!.layoutParams = ViewGroup.LayoutParams(1080, 1920)
         setContentView(game)
 
-        level2.setBallStartPos(200f,200f)
+        level1.setBallStartPos(200f,200f)
 
     }
 
@@ -136,6 +123,5 @@ class Level_2_Activity : AppCompatActivity() {
         super.onDestroy()
         game!!.DeactivateSounds();
     }
-
 
 }
