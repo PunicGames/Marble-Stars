@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
-import android.view.View
 
 //Porque? Pa no repetir esto en cada game view
 class Level(
@@ -16,6 +15,7 @@ class Level(
     _backgroundImageID: Int,
     _wallTileID: Int,
     _goalTileID: Int,
+    _starTileID: Int,
     _holeTileID: Int
 ) {
 
@@ -36,6 +36,7 @@ class Level(
     var backGround: Bitmap
     var wall: Bitmap
     var goal: Bitmap
+    var star: Bitmap
     var hole: Bitmap
 
 
@@ -49,6 +50,9 @@ class Level(
 
         goal = BitmapFactory.decodeResource(v.resources, _goalTileID)
         goal = Bitmap.createScaledBitmap(goal, cellSize.toInt(), cellSize.toInt(), true)
+
+        star = BitmapFactory.decodeResource(v.resources, _starTileID)
+        star = Bitmap.createScaledBitmap(star, cellSize.toInt(), cellSize.toInt(), true)
 
         hole = BitmapFactory.decodeResource(v.resources, _holeTileID)
         hole = Bitmap.createScaledBitmap(hole, cellSize.toInt(), cellSize.toInt(), true)
@@ -119,6 +123,30 @@ class Level(
 
         colliders.add(collider)
     }
+    fun setStar(_row: Int, _col: Int) {
+
+        //Bitmap tile
+        var starTile = Cell(
+            star,
+            _row,
+            _col,
+            _col * cellSize,
+            _row * cellSize,
+
+            )
+
+        cells.add(starTile)
+        //Collider
+        var collider = BoxCollider(
+            Type.star,
+            _col * cellSize,
+            _col * cellSize,
+            _row * cellSize,
+            _row * cellSize
+        )
+
+        colliders.add(collider)
+    }
 
     fun setHole(_row: Int, _col: Int) {
 
@@ -145,7 +173,7 @@ class Level(
         colliders.add(collider)
     }
 
-    fun setBallStarPos(_x: Float, _y: Float) {
+    fun setBallStartPos(_x: Float, _y: Float) {
         v.ball.move(_x, _y)
     }
 

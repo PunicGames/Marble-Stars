@@ -79,6 +79,7 @@ class Level_3_Activity : AppCompatActivity() {
             R.drawable.grass,
             R.drawable.wall_tile,
             R.drawable.goal,
+            R.drawable.star,
             R.drawable.hole
         )
 
@@ -98,7 +99,7 @@ class Level_3_Activity : AppCompatActivity() {
         //////////////////////////////////////////////////////////////////////////////
 
         setContentView(game)
-        level3.setBallStarPos(200f,200f)
+        level3.setBallStartPos(200f,200f)
 
     }
 

@@ -22,7 +22,7 @@ class GameView(context: Context, val vibrator: Vibrator) :
     //Ball
     var ballPaint: Paint = Paint()
 
-    var ball: Ball = Ball(0f, 0f, 32f, ballPaint)
+    var ball: Ball = Ball(0f, 0f, 25f, ballPaint)
 
     //Level
     var level: Level? = null
@@ -37,7 +37,6 @@ class GameView(context: Context, val vibrator: Vibrator) :
         level?.draw(canvas)
         ball.draw(canvas)
         invalidate()
-
         //Log.d(h.toString(), "Height")
     }
 

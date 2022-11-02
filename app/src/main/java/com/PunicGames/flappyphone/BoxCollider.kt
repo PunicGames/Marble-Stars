@@ -3,7 +3,7 @@ package com.PunicGames.flappyphone
 import android.view.View
 
 enum class Type {
-    wall, goal, hole
+    wall, goal, hole,star
 }
 
 class BoxCollider(
@@ -29,7 +29,11 @@ class BoxCollider(
             }
 
             Type.goal -> {
+                //Obtener puntos y finalizar partida
+            }
+            Type.star -> {
                 //Obtener puntos
+
             }
 
             Type.hole -> {

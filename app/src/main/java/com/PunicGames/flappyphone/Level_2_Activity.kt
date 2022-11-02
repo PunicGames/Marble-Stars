@@ -79,6 +79,7 @@ class Level_2_Activity : AppCompatActivity() {
             R.drawable.grass,
             R.drawable.wall_tile,
             R.drawable.goal,
+            R.drawable.star,
             R.drawable.hole
         )
 
@@ -86,11 +87,13 @@ class Level_2_Activity : AppCompatActivity() {
 
         //DISEÑA  TU NIVEL AQUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        level2.setTWallBlock(6, 3, 8, 15)
+        level2.setTWallBlock(0, 0, 18, 1)
         level2.setTWallBlock(12, 3, 14, 15)
 
         level2.setGoal(14, 16)
-        level2.setHole(12, 16)
+        level2.setStar(12, 16)
+
+        level2.setStar(14,30)
 
 
         //////////////////////////////////////////////////////////////////////////////
@@ -98,7 +101,7 @@ class Level_2_Activity : AppCompatActivity() {
         //////////////////////////////////////////////////////////////////////////////
 
         setContentView(game)
-        level2.setBallStarPos(200f,200f)
+        level2.setBallStartPos(200f,200f)
 
     }
 
