@@ -1,3 +1,4 @@
+/*
 package com.PunicGames.flappyphone
 
 import android.content.Context
@@ -15,7 +16,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-/*
 class GravityActivity : AppCompatActivity() {
 
     private lateinit var mSensorManager: SensorManager
@@ -281,5 +281,7 @@ class GravityActivity : AppCompatActivity() {
         super.onDestroy()
     }
 }
-*/
- 
+
+
+
+ */

@@ -5,9 +5,11 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.view.View
 import android.graphics.Paint
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import androidx.annotation.RequiresApi
 
 
@@ -18,16 +20,39 @@ class GameView(context: Context, val vibrator: Vibrator) :
     var speed: Vector2D = Vector2D(0.0F, 0.0F)
     val TimeStep: Float = 0.4f
 
+    //Music and SFX
+    private lateinit var collisionMediaPlayer: MediaPlayer
+    private lateinit var backgroundMediaPlayer: MediaPlayer
+    private lateinit var goalMediaPlayer: MediaPlayer
+
 
     //Ball
     var ballPaint: Paint = Paint()
-
     var ball: Ball = Ball(0f, 0f, 25f, ballPaint)
 
     //Level
     var level: Level? = null
 
+    //Points
+    var points: Int = 0
+
+
     init {
+        //Sounds
+        if (!this::collisionMediaPlayer.isInitialized) {
+            collisionMediaPlayer = MediaPlayer.create(context, R.raw.hit);
+        }
+        if (!this::goalMediaPlayer.isInitialized) {
+            goalMediaPlayer = MediaPlayer.create(context, R.raw.goal);
+        }
+        if (!this::backgroundMediaPlayer.isInitialized) {
+            backgroundMediaPlayer = MediaPlayer.create(context, R.raw.background);
+            backgroundMediaPlayer.start()
+            backgroundMediaPlayer.isLooping = true;
+            backgroundMediaPlayer.setVolume(0.2f, 0.2f);
+        }
+
+
         ballPaint.color = Color.RED
     }
 
@@ -37,39 +62,96 @@ class GameView(context: Context, val vibrator: Vibrator) :
         level?.draw(canvas)
         ball.draw(canvas)
         invalidate()
-        //Log.d(h.toString(), "Height")
+        //Log.d(height.toString(), "Height")
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun onSensorChanged(x: Float, y: Float) {
 
         var acel = Vector2D(x * -1, y)
+
+        ball.move(ball.speed.x * TimeStep, ball.speed.y * TimeStep)
+
+        ball.speed += acel * TimeStep
+        ball.speed *= 0.99F
+
+        checkCollisions()
+
+
+    }
+    fun resolveCollision(ball: Ball, box: BoxCollider, x: Float, y:Float){
+
+            when (box.type) {
+                Type.wall -> {
+                    //rebota
+                    
+
+
+                }
+
+                Type.goal -> {
+                    //Obtener puntos y finalizar partida
+                }
+                Type.star -> {
+                    //Obtener puntos
+
+                }
+
+                Type.hole -> {
+                    //Perder o bajar vida
+
+                }
+
+                else -> {
+
+                }
+
+            }
+        /*
+        var acel = Vector2D(x  * -1, y)
 
         ball.move(speed.x * TimeStep, speed.y * TimeStep)
 
         speed += acel * TimeStep
         speed *= 0.99F
-/*
-        if (circleX > (height - view.height) && speed.y > 0){
-            speed.y *= -1
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                vibrate()
+
+        if((ball.posX  >= box.xmin) && (ball.posY  > box.ymin) && (ball.posY < (box.ymax))){ // Bola chocando por la derecha de la caja
+            ball.posX = box.xmin + box.width
+            speed.x *= -0.3f
         }
-        if (view.x > (width - view.width) && speed.x > 0){
-            speed.x *= -1
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                vibrate()
+        else if((ball.posY < box.ymin) && (ball.posX > box.xmin) &&(ball.posX  < box.xmax)){// Bola chocando por arriba de la caja
+            ball.posY = box.ymin - ball.radio
+            speed.y *= -0.3f
         }
-        if (view.y < 0 && speed.y < 0){
-            speed.y *= -1
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                vibrate()
+        else if((ball.posY > box.ymin) && (ball.posX > box.xmin) &&(ball.posX  < box.xmax)){// Bola chocando por abajo de la caja
+            ball.posY = box.ymin + box.height
+            speed.y *= -0.3f
         }
-        if (view.x < 0 && speed.x < 0){
-            speed.x *= -1
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                vibrate()
+        else if((ball.posX  < box.xmin) && (ball.posY > box.ymin) && (ball.posY < (box.ymax))){                     // Bola chocando por la izquierda de la caja
+            ball.posX = box.xmin - ball.radio
+            speed.x *= -0.3f
         }
-        */
+
+         */
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun checkCollisions(){
+        for (i in 0..level?.colliders!!.size - 1) {
+
+            if (level?.colliders!![i].checkCollision(ball)) {
+                resolveCollision(ball, level?.colliders!![i], x, y)
+                //ball.posX =
+                //ball.posY =
+                vibrate()
+
+                if (collisionMediaPlayer.isPlaying) {
+                    collisionMediaPlayer.seekTo(0)
+                }
+                collisionMediaPlayer.start();
+            }
+
+
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
