@@ -56,7 +56,6 @@ class Level(
 
         hole = BitmapFactory.decodeResource(v.resources, _holeTileID)
         hole = Bitmap.createScaledBitmap(hole, cellSize.toInt(), cellSize.toInt(), true)
-
     }
 
     fun setTWallBlock(
@@ -90,10 +89,10 @@ class Level(
 
         var collider = BoxCollider(
             Type.wall,
-            _colInit * cellSize,
-            _colFinalExclusive * cellSize,
-            _rowInit * cellSize,
-            _rowFinalExclusive * cellSize
+            _colInit * cellSize - cellSize/2,
+            _colFinalExclusive * cellSize + cellSize/2,
+            _rowInit * cellSize - cellSize/2,
+            _rowFinalExclusive * cellSize + cellSize/2
         )
 
         colliders.add(collider)
