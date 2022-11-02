@@ -3,20 +3,14 @@ package com.PunicGames.flappyphone
 import android.graphics.Bitmap
 import android.view.View
 
-enum class Type{
-    wall,floor
-}
 
-class Cell (bitmapi:Bitmap,row_:Int, col_:Int,x: Float, y:Float, widthi:Int, heighti:Int, t: Type){
+
+class Cell (bitmapi:Bitmap,col_:Int,row_:Int, x: Float, y:Float){
 
     var bitmap: Bitmap = bitmapi
-    var Col: Int = col_
-    var Row: Int = row_
     var posX : Float = x
     var posY : Float = y
-    var width: Int =widthi
-    var height: Int =heighti
-    var type: Type = t
+
 
 
     fun checkCollision(ball: View) {
