@@ -18,8 +18,8 @@ class Ball(_posX: Float, _posY: Float, _radio: Float, _paint: Paint) {
     }
 
     fun move(_posX: Float, _posY: Float) {
-        posX = _posX
-        posY = _posY
+        posX += _posX
+        posY += _posY
     }
 
 
