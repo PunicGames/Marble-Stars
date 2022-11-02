@@ -17,7 +17,6 @@ class GameView(context: Context, val vibrator: Vibrator) :
     View(context) {
 
     //Accelerometer variables and vibrator
-    var speed: Vector2D = Vector2D(0.0F, 0.0F)
     val TimeStep: Float = 0.4f
 
     //Music and SFX
@@ -84,7 +83,8 @@ class GameView(context: Context, val vibrator: Vibrator) :
             when (box.type) {
                 Type.wall -> {
                     //rebota
-                    
+                    ball.speed.x= -ball.speed.x
+                    ball.speed.y=-ball.speed.y
 
 
                 }
@@ -98,7 +98,7 @@ class GameView(context: Context, val vibrator: Vibrator) :
                 }
 
                 Type.hole -> {
-                    //Perder o bajar vida
+                    //Perder o bajar vida o devolver al inicio
 
                 }
 
@@ -140,8 +140,7 @@ class GameView(context: Context, val vibrator: Vibrator) :
 
             if (level?.colliders!![i].checkCollision(ball)) {
                 resolveCollision(ball, level?.colliders!![i], x, y)
-                //ball.posX =
-                //ball.posY =
+
                 vibrate()
 
                 if (collisionMediaPlayer.isPlaying) {
