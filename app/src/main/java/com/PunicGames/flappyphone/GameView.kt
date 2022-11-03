@@ -11,13 +11,14 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 import androidx.annotation.RequiresApi
+import android.content.Intent
 
 
 class GameView(context: Context, val vibrator: Vibrator) :
     View(context) {
 
     //Accelerometer variables and vibrator
-    val TimeStep: Float = 0.4f
+    val TimeStep: Float = 0.25f
 
     //Music and SFX
     private lateinit var collisionMediaPlayer: MediaPlayer
@@ -102,15 +103,36 @@ class GameView(context: Context, val vibrator: Vibrator) :
 
             when (box.type) {
                 Type.wall -> {
-                    //rebota
-                    ball.speed.x= -ball.speed.x
-                    ball.speed.y=-ball.speed.y
+                    var boxWidth = box.xmax - box.xmin;
+                    var boxHeight = box.ymax - box.ymin;
+                    var boxXCenter = box.xmin + boxWidth*0.5f;
+                    var boxYCenter = box.ymin + boxHeight*0.5f;
 
+                    if((ball.posX >= boxXCenter) && (ball.posY > boxYCenter - boxHeight) && (ball.posY < (boxYCenter + boxHeight)))// Bola chocando por la derecha de la caja
+                    {
+                        ball.speed.x= -ball.speed.x
+                    }
+                    if((ball.posX < boxXCenter) && (ball.posY > boxYCenter - boxHeight) && (ball.posY < (boxYCenter + boxHeight)))// Bola chocando por la izquierda de la caja
+                    {
+                        ball.speed.x= -ball.speed.x
+                    }
+                    if((ball.posY > boxYCenter) && (ball.posX > boxXCenter - boxWidth) && (ball.posX < boxXCenter + boxWidth))// Bola chocando por abajo de la caja
+                    {
+                        ball.speed.y= -ball.speed.y
 
+                    }
+                    if((ball.posY < boxYCenter) && (ball.posX > boxXCenter - boxWidth) && (ball.posX < boxXCenter + boxWidth))
+                    {
+                        ball.speed.y=-ball.speed.y
+
+                    }
                 }
 
                 Type.goal -> {
                     //Obtener puntos y finalizar partida
+                    DeactivateSounds();
+                    val intent = Intent(context, LevelSelectionActivity::class.java)
+                    context.startActivity(intent);
                 }
                 Type.star -> {
                     //Obtener puntos
@@ -159,17 +181,29 @@ class GameView(context: Context, val vibrator: Vibrator) :
         for (i in 0..level?.colliders!!.size - 1) {
 
             if (level?.colliders!![i].checkCollision(ball)) {
-                resolveCollision(ball, level?.colliders!![i], x, y)
+                // Colision con muro
+                if (level?.colliders!![i].type == Type.wall) {
+                    resolveCollision(ball, level?.colliders!![i], x, y)
 
-                vibrate()
+                    vibrate()
 
-                if (collisionMediaPlayer.isPlaying) {
-                    collisionMediaPlayer.seekTo(0)
+                    if (collisionMediaPlayer.isPlaying) {
+                        collisionMediaPlayer.seekTo(0)
+                    }
+                    collisionMediaPlayer.start();
                 }
-                collisionMediaPlayer.start();
+
+                // Colision con meta
+                if (level?.colliders!![i].type == Type.goal) {
+
+                    if (goalMediaPlayer.isPlaying) {
+                        goalMediaPlayer.seekTo(0)
+                    }
+                    goalMediaPlayer.start();
+
+                    resolveCollision(ball, level?.colliders!![i], x, y)
+                }
             }
-
-
         }
     }
 

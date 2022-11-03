@@ -27,10 +27,12 @@ class BoxCollider(
         // SQUARE to SQUARE collision
         //var collisionX = (xmax >= b.posX) && (b.posX + b.radio >= xmin)
         //var collisionY = (ymax >= b.posY) && (b.posY + b.radio >= ymin)
+        var collisionX = (xmax >= b.posX) && (b.posX >= xmin)
+        var collisionY = (ymax >= b.posY) && (b.posY >= ymin)
 
         // SQUARE to CIRCLE collision
-        var collisionX = (xmax >= b.posX + b.radio) && (b.posX - b.radio >= xmin)
-        var collisionY = (ymax >= b.posY + b.radio) && (b.posY - b.radio >= ymin)
+        //var collisionX = (xmax >= b.posX + b.radio) && (b.posX - b.radio >= xmin)
+        //var collisionY = (ymax >= b.posY + b.radio) && (b.posY - b.radio >= ymin)
 
         return collisionX && collisionY
     }
