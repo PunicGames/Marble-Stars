@@ -9,6 +9,8 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
+import android.view.Window
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 
 class Level_3_Activity : AppCompatActivity() {
@@ -34,6 +36,10 @@ class Level_3_Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mVibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
