@@ -88,10 +88,10 @@ class Level(
 
         var collider = BoxCollider(
             Type.wall,
-            _colInit * cellSize - cellSize/2,
-            _colFinalExclusive * cellSize + cellSize/2,
-            _rowInit * cellSize - cellSize/2,
-            _rowFinalExclusive * cellSize + cellSize/2
+            _colInit * cellSize,
+            _colFinalExclusive * cellSize,
+            _rowInit * cellSize,
+            _rowFinalExclusive * cellSize
         )
 
         colliders.add(collider)
@@ -114,9 +114,9 @@ class Level(
         var collider = BoxCollider(
             Type.goal,
             _col * cellSize,
-            _col * cellSize,
+            _col * cellSize + cellSize,
             _row * cellSize,
-            _row * cellSize
+            _row * cellSize+ cellSize
         )
 
         colliders.add(collider)
@@ -138,9 +138,9 @@ class Level(
         var collider = BoxCollider(
             Type.star,
             _col * cellSize,
-            _col * cellSize,
+            _col * cellSize+ cellSize,
             _row * cellSize,
-            _row * cellSize
+            _row * cellSize+ cellSize
         )
 
         colliders.add(collider)
@@ -163,9 +163,9 @@ class Level(
         var collider = BoxCollider(
             Type.hole,
             _col * cellSize,
-            _col * cellSize,
+            _col * cellSize+ cellSize,
             _row * cellSize,
-            _row * cellSize
+            _row * cellSize+ cellSize
         )
 
         colliders.add(collider)
