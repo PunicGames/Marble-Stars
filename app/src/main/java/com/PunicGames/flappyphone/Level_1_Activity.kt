@@ -9,11 +9,10 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
-import android.view.Window
-import android.view.WindowManager
+import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 
-class Level_3_Activity : AppCompatActivity() {
+class Level_1_Activity : AppCompatActivity() {
     lateinit var mSensorManager: SensorManager
     lateinit var mGravitometer: Sensor
     lateinit var mVibrator: Vibrator
@@ -30,16 +29,11 @@ class Level_3_Activity : AppCompatActivity() {
 
             game?.onSensorChanged(event.values[0], event.values[1])
 
-
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mVibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
@@ -55,14 +49,14 @@ class Level_3_Activity : AppCompatActivity() {
 
         game = GameView(
             this, mVibrator
-        //////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////
-        //LEVEL SETUP
+            //////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+            //LEVEL SETUP
         )
 
         //Level initialization
-        var level3: Level = Level(
+        var level1: Level = Level(
             game!!,
             18,
             32,
@@ -75,75 +69,53 @@ class Level_3_Activity : AppCompatActivity() {
             R.drawable.hole
         )
 
-        game!!.level = level3
-
-
+        game!!.level = level1
 
         //DISEÑA  TU NIVEL AQUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // Meta
-        level3.setGoal(29, 15)
+        level1.setGoal(2, 15)
 
         // Limites
-        level3.setTWallBlock(0, 0, 1, 32)
-        level3.setTWallBlock(17, 0, 18, 32)
-        level3.setTWallBlock(0, 0, 18, 1)
-        level3.setTWallBlock(0, 31, 18, 32)
-
+        level1.setTWallBlock(0, 0, 1, 32)
+        level1.setTWallBlock(17, 0, 18, 32)
+        level1.setTWallBlock(0, 0, 18, 1)
+        level1.setTWallBlock(0, 31, 18, 32)
 
         // Paredes Horizontales
-        level3.setTWallBlock(1, 6, 4, 7)
-        level3.setTWallBlock(9, 4, 15, 5)
-        level3.setTWallBlock(13, 8, 17, 9)
-        level3.setTWallBlock(4, 10, 13, 11)
-        level3.setTWallBlock(10, 12, 13, 13)
-        level3.setTWallBlock(1, 14, 5, 15)
-        level3.setTWallBlock(7, 19, 17, 20)
-        level3.setTWallBlock(10, 22, 14, 23)
-        level3.setTWallBlock(13, 23, 17, 24)
-        level3.setTWallBlock(4, 28, 11, 29)
+        level1.setTWallBlock(1, 4, 3, 5)
+        level1.setTWallBlock(3, 8, 5, 9)
+        level1.setTWallBlock(1, 12, 8, 13)
+        level1.setTWallBlock(1, 16, 5, 17)
+        level1.setTWallBlock(3, 28, 13, 29)
+        level1.setTWallBlock(11, 11, 14, 12)
+        level1.setTWallBlock(8, 17, 12, 18)
+        level1.setTWallBlock(11, 21, 14, 22)
 
         // Paredes Verticales
-        level3.setTWallBlock(6, 1, 7, 7)
-        level3.setTWallBlock(9, 4, 10, 11)
-        level3.setTWallBlock(1, 9, 2, 12)
-        level3.setTWallBlock(13, 8, 14, 17)
-        level3.setTWallBlock(7, 13, 8, 26)
-        level3.setTWallBlock(4, 14, 5, 29)
-        level3.setTWallBlock(13, 27, 14, 31)
+        level1.setTWallBlock(5, 1, 6, 10)
+        level1.setTWallBlock(8, 3, 9, 26)
+        level1.setTWallBlock(4, 16, 5, 26)
+        level1.setTWallBlock(13, 26, 14, 31)
+        level1.setTWallBlock(11, 3, 12, 12)
+        level1.setTWallBlock(14, 1, 15, 23)
+        level1.setTWallBlock(16, 27, 17, 28)
 
         // Estrellas
-        level3.setStar(9, 11)
-        level3.setStar(10, 15)
-        level3.setStar(16, 2)
-        level3.setStar(21, 15)
+        level1.setStar(30, 16)
+        level1.setStar(29, 11)
+        level1.setStar(9, 12)
+        level1.setStar(15, 1)
 
         // Agujeros
-        level3.setHole(7, 1)
-        level3.setHole(2, 7)
-        level3.setHole(3, 12)
-        level3.setHole(5, 10)
-        level3.setHole(7, 16)
-        level3.setHole(13, 1)
-        level3.setHole(13, 14)
-        level3.setHole(15, 10)
-        level3.setHole(15, 11)
-        level3.setHole(16, 10)
-        level3.setHole(16, 11)
-        level3.setHole(18, 16)
-        level3.setHole(20, 1)
-        level3.setHole(21, 10)
-        level3.setHole(24, 15)
-        level3.setHole(26, 3)
-        level3.setHole(29, 8)
-        level3.setHole(30, 1)
 
 
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
-
+        game!!.layoutParams = ViewGroup.LayoutParams(1080, 1920)
         setContentView(game)
-        level3.setBallStartPos(200f,200f)
+
+        level1.setBallStartPos(200f,200f)
 
     }
 

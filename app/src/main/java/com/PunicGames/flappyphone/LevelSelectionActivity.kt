@@ -28,7 +28,7 @@ class LevelSelectionActivity : AppCompatActivity() {
         }
         var lvl1 : Button = findViewById(R.id.lvl1_button)
         lvl1.setOnClickListener {
-            //val intent = Intent(context, GravityActivity::class.java)
+            val intent = Intent(context, Level_1_Activity::class.java)
             startActivity(intent)
             finish()
         }
@@ -46,7 +46,9 @@ class LevelSelectionActivity : AppCompatActivity() {
         }
         var lvl4 : Button = findViewById(R.id.lvl4_button)
         lvl4.setOnClickListener {
-            val intent = Intent(context, Test_Activity::class.java)
+
+            val intent = Intent(context, Level_4_Activity::class.java)
+
             startActivity(intent)
             finish()
         }

@@ -6,15 +6,12 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
-import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 
-class Level_2_Activity : AppCompatActivity() {
+class Level_4_Activity : AppCompatActivity() {
     lateinit var mSensorManager: SensorManager
     lateinit var mGravitometer: Sensor
     lateinit var mVibrator: Vibrator
@@ -30,17 +27,11 @@ class Level_2_Activity : AppCompatActivity() {
         override fun onSensorChanged(event: SensorEvent) {
 
             game?.onSensorChanged(event.values[0], event.values[1])
-
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 
         mVibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
@@ -53,7 +44,6 @@ class Level_2_Activity : AppCompatActivity() {
                 SensorManager.SENSOR_DELAY_GAME
             )
 
-        //game = findViewById(R.id.gv)
 
         game = GameView(
             this, mVibrator
@@ -63,10 +53,8 @@ class Level_2_Activity : AppCompatActivity() {
             //LEVEL SETUP
         )
 
-
-
         //Level initialization
-        var level2: Level = Level(
+        var level4: Level = Level(
             game!!,
             18,
             32,
@@ -79,66 +67,89 @@ class Level_2_Activity : AppCompatActivity() {
             R.drawable.hole
         )
 
-        game!!.level = level2
+        game!!.level = level4
+
+
 
         //DISEÑA  TU NIVEL AQUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // Meta
-        level2.setGoal(9, 1)
+        level4.setGoal(4, 4)
 
         // Limites
-        level2.setTWallBlock(0, 0, 1, 32)
-        level2.setTWallBlock(17, 0, 18, 32)
-        level2.setTWallBlock(0, 0, 18, 1)
-        level2.setTWallBlock(0, 31, 18, 32)
+        level4.setTWallBlock(0, 0, 1, 32)
+        level4.setTWallBlock(17, 0, 18, 32)
+        level4.setTWallBlock(0, 0, 18, 1)
+        level4.setTWallBlock(0, 31, 18, 32)
+
 
         // Paredes Horizontales
-        level2.setTWallBlock(1, 4, 15, 5)
-        level2.setTWallBlock(1, 8, 15, 9)
-        level2.setTWallBlock(1, 8, 15, 9)
-        level2.setTWallBlock(1, 8, 15, 9)
-        level2.setTWallBlock(5, 12, 7, 13)
-        level2.setTWallBlock(1, 11, 2, 12)
-        level2.setTWallBlock(12, 11, 17, 12)
-        level2.setTWallBlock(3, 20, 9, 21)
-        level2.setTWallBlock(1, 27, 10, 28)
-
+        level4.setTWallBlock(9, 1, 14, 2)
+        level4.setTWallBlock(9, 4, 14, 5)
+        level4.setTWallBlock(3, 5, 10, 6)
+        level4.setTWallBlock(13, 8, 17, 9)
+        level4.setTWallBlock(6, 10, 11, 11)
+        level4.setTWallBlock(6, 14, 13, 15)
+        level4.setTWallBlock(1, 8, 2, 9)
+        level4.setTWallBlock(1, 17, 3, 18)
+        level4.setTWallBlock(12, 17, 17, 18)
+        level4.setTWallBlock(4, 24, 13, 25)
+        level4.setTWallBlock(6, 26, 9, 27)
+        level4.setTWallBlock(3, 28, 8, 29)
+        level4.setTWallBlock(10, 28, 15, 29)
 
         // Paredes Verticales
-        level2.setTWallBlock(4, 3, 5, 4)
-        level2.setTWallBlock(4, 9, 5, 18)
-        level2.setTWallBlock(13, 3, 14, 4)
-        level2.setTWallBlock(7, 15, 15, 16)
-        level2.setTWallBlock(9, 9, 10, 24)
-        level2.setTWallBlock(3, 17, 4, 18)
-        level2.setTWallBlock(3, 21, 4, 24)
-        level2.setTWallBlock(6, 24, 7, 27)
-        level2.setTWallBlock(13, 18, 14, 31)
-        level2.setTWallBlock(12, 21, 13, 23)
-        level2.setTWallBlock(11, 30, 13, 31)
+        level4.setTWallBlock(3, 1, 4, 6)
+        level4.setTWallBlock(4, 1, 5, 2)
+        level4.setTWallBlock(5, 6, 6, 10)
+        level4.setTWallBlock(4, 7, 5, 8)
+        level4.setTWallBlock(4, 9, 5, 10)
+        level4.setTWallBlock(9, 11, 10, 12)
+        level4.setTWallBlock(3, 11, 4, 15)
+        level4.setTWallBlock(8, 14, 9, 18)
+        level4.setTWallBlock(4, 19, 5, 25)
+        level4.setTWallBlock(6, 25, 7, 26)
+        level4.setTWallBlock(12, 17, 13, 29)
+        level4.setTWallBlock(6, 11, 7, 14)
 
         // Estrellas
-        level2.setStar(6, 1)
-        level2.setStar(9, 5)
-        level2.setStar(29, 2)
-        level2.setStar(30, 15)
+        level4.setStar(11, 4)
+        level4.setStar(11, 7)
+        level4.setStar(18, 14)
+        level4.setStar(29, 2)
 
         // Agujeros
-        level2.setHole(1, 8)
-        level2.setHole(5, 11)
-        level2.setHole(7, 4)
-        level2.setHole(11, 5)
-        level2.setHole(14, 10)
-        level2.setHole(26, 1)
-        level2.setHole(29, 6)
-        level2.setHole(25, 15)
+        level4.setHole(2, 6)
+        level4.setHole(2, 16)
+        level4.setHole(4, 6)
+        level4.setHole(7, 7)
+        level4.setHole(7, 11)
+        level4.setHole(7, 12)
+        level4.setHole(6, 4)
+        level4.setHole(8, 4)
+        level4.setHole(10, 4)
+        level4.setHole(10, 5)
+        level4.setHole(11, 15)
+        level4.setHole(18, 1)
+        level4.setHole(18, 8)
+        level4.setHole(19, 8)
+        level4.setHole(20, 8)
+        level4.setHole(21, 3)
+        level4.setHole(21, 14)
+        level4.setHole(23, 5)
+        level4.setHole(23, 11)
+        level4.setHole(24, 16)
+        level4.setHole(25, 1)
+        level4.setHole(26, 13)
+        level4.setHole(27, 10)
+        level4.setHole(29, 7)
+
 
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
-        //game!!.layoutParams = ViewGroup.LayoutParams(1080, 1920)
+
         setContentView(game)
-
-        level2.setBallStartPos(200f,200f)
+        level4.setBallStartPos(200f,200f)
 
     }
 
@@ -146,6 +157,5 @@ class Level_2_Activity : AppCompatActivity() {
         super.onDestroy()
         game!!.DeactivateSounds();
     }
-
 
 }
