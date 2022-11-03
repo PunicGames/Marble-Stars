@@ -33,7 +33,7 @@ class ResumeLevel : AppCompatActivity() {
         minuteText = findViewById(R.id.minutos)
         secondsText = findViewById(R.id.segundos)
 
-        pointText.text = puntos.toString() + " puntos"
+        pointText.text = puntos.toString() + " estrellas"
         minuteText.text = minutos.toString() + " minutos"
         secondsText.text = segundos.toString() + " segundos"
 

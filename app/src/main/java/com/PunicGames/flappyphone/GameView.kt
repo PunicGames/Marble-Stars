@@ -146,8 +146,11 @@ class GameView(context: Context, val vibrator: Vibrator) :
                     DeactivateSounds();
                     val intent = Intent(context, ResumeLevel::class.java)
                     val finishTime = LocalDateTime.now()
-                    var minutes = finishTime.minute - initTime.minute
-                    var seconds = finishTime.second - initTime.second
+                    var initTimeInSeconds = initTime.minute * 60 + initTime.second;
+                    var finishTimeInSeconds = finishTime.minute * 60 + finishTime.second;
+                    var totalSeconds = finishTimeInSeconds - initTimeInSeconds;
+                    var minutes = (totalSeconds / 60).toInt()
+                    var seconds = totalSeconds - minutes * 60
                     intent.putExtra("points", points)
                     intent.putExtra("minutes", minutes)
                     intent.putExtra("seconds", seconds)
