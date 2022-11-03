@@ -17,7 +17,7 @@ class BoxCollider(
     val height: Float = ymax - ymin
 ) {
 
-
+    lateinit var tile: Cell
 
     init {
     }
