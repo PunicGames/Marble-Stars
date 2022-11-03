@@ -9,6 +9,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
 import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 
@@ -35,6 +37,11 @@ class Level_2_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         mVibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -46,6 +53,7 @@ class Level_2_Activity : AppCompatActivity() {
                 SensorManager.SENSOR_DELAY_GAME
             )
 
+        //game = findViewById(R.id.gv)
 
         game = GameView(
             this, mVibrator
@@ -54,6 +62,8 @@ class Level_2_Activity : AppCompatActivity() {
             //////////////////////////////////////////////////////////////////////////////
             //LEVEL SETUP
         )
+
+
 
         //Level initialization
         var level2: Level = Level(
@@ -125,7 +135,7 @@ class Level_2_Activity : AppCompatActivity() {
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
-        game!!.layoutParams = ViewGroup.LayoutParams(1080, 1920)
+        //game!!.layoutParams = ViewGroup.LayoutParams(1080, 1920)
         setContentView(game)
 
         level2.setBallStartPos(200f,200f)
