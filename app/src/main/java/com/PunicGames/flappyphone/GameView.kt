@@ -12,18 +12,20 @@ import android.os.Vibrator
 import android.util.Log
 import androidx.annotation.RequiresApi
 import android.content.Intent
+import androidx.core.graphics.set
+import java.util.concurrent.locks.LockSupport
 
 
 class GameView(context: Context, val vibrator: Vibrator) :
     View(context) {
 
     //Accelerometer variables and vibrator
-    val TimeStep: Float = 0.25f
+    val TimeStep: Float = 0.2f
 
     //Music and SFX
     private lateinit var collisionMediaPlayer: MediaPlayer
     private lateinit var backgroundMediaPlayer: MediaPlayer
-    private lateinit var goalMediaPlayer: MediaPlayer
+    private lateinit var starMediaPlayer: MediaPlayer
     private lateinit var rollingBallPlayer: MediaPlayer
 
 
@@ -43,8 +45,9 @@ class GameView(context: Context, val vibrator: Vibrator) :
         if (!this::collisionMediaPlayer.isInitialized) {
             collisionMediaPlayer = MediaPlayer.create(context, R.raw.hit);
         }
-        if (!this::goalMediaPlayer.isInitialized) {
-            goalMediaPlayer = MediaPlayer.create(context, R.raw.goal);
+        if (!this::starMediaPlayer.isInitialized) {
+            starMediaPlayer = MediaPlayer.create(context, R.raw.goal);
+            starMediaPlayer.setVolume(1.0f, 1.0f);
         }
         if (!this::backgroundMediaPlayer.isInitialized) {
             backgroundMediaPlayer = MediaPlayer.create(context, R.raw.background);
@@ -134,14 +137,26 @@ class GameView(context: Context, val vibrator: Vibrator) :
                     val intent = Intent(context, LevelSelectionActivity::class.java)
                     context.startActivity(intent);
                 }
-                Type.star -> {
-                    //Obtener puntos
 
+                Type.star -> {
+                    if(!box.tile.collected){
+                        // Sonido
+                        if (starMediaPlayer.isPlaying) {
+                            starMediaPlayer.seekTo(0)
+                        }
+                        starMediaPlayer.start();
+
+                        //Obtener puntos
+                        points += 1 ;
+                        box.tile.collected = true;
+                        box.tile.posX = -100f;
+                    }
                 }
 
                 Type.hole -> {
                     //Perder o bajar vida o devolver al inicio
-
+                    ball.posX = 120f;
+                    ball.posY = 120f;
                 }
 
                 else -> {
@@ -183,8 +198,6 @@ class GameView(context: Context, val vibrator: Vibrator) :
             if (level?.colliders!![i].checkCollision(ball)) {
                 // Colision con muro
                 if (level?.colliders!![i].type == Type.wall) {
-                    resolveCollision(ball, level?.colliders!![i], x, y)
-
                     vibrate()
 
                     if (collisionMediaPlayer.isPlaying) {
@@ -193,16 +206,7 @@ class GameView(context: Context, val vibrator: Vibrator) :
                     collisionMediaPlayer.start();
                 }
 
-                // Colision con meta
-                if (level?.colliders!![i].type == Type.goal) {
-
-                    if (goalMediaPlayer.isPlaying) {
-                        goalMediaPlayer.seekTo(0)
-                    }
-                    goalMediaPlayer.start();
-
-                    resolveCollision(ball, level?.colliders!![i], x, y)
-                }
+                resolveCollision(ball, level?.colliders!![i], x, y)
             }
         }
     }
@@ -220,9 +224,9 @@ class GameView(context: Context, val vibrator: Vibrator) :
             collisionMediaPlayer.stop()
             collisionMediaPlayer.release()
         }
-        if(this::goalMediaPlayer.isInitialized){
-            goalMediaPlayer.stop()
-            goalMediaPlayer.release()
+        if(this::starMediaPlayer.isInitialized){
+            starMediaPlayer.stop()
+            starMediaPlayer.release()
         }
         if(this::rollingBallPlayer.isInitialized){
             rollingBallPlayer.stop()

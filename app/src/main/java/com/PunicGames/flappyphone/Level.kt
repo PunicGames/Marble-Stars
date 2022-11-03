@@ -142,7 +142,7 @@ class Level(
             _row * cellSize,
             _row * cellSize+ cellSize
         )
-
+        collider.tile = starTile
         colliders.add(collider)
     }
 
