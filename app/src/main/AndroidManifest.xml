@@ -29,6 +29,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".Test_Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".LeaderboardActivity"
             android:exported="false"
             android:label="@string/title_activity_leaderboard"
@@ -53,20 +60,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".Level_2_Activity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Level_3_Activity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
+
         <activity
             android:name=".LevelSelectionActivity"
             android:exported="false">

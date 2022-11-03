@@ -8,8 +8,6 @@ import android.graphics.Color
 //Porque? Pa no repetir esto en cada game view
 class Level(
     view: GameView,
-    c: Int,
-    r: Int,
     screenWidth: Int,
     screenHeight: Int,
     _backgroundImageID: Int,
@@ -21,17 +19,18 @@ class Level(
 
     var v: GameView = view
 
-    //TO BE IMPLEMENTED
-    var w: Int = v.width
-    var h: Int = v.height
-    val col: Int = c //18
-    val row: Int = r //32
-    val numberOfCells: Int = c * r
+
+
+    val col: Int = 18
+    val row: Int = 32
+    val screenWidth : Int = screenWidth
+
 
 
     val cells = ArrayList<Cell>()
     val colliders = ArrayList<BoxCollider>()
-    val cellSize: Float = 60f
+    //val cellSize: Float = 60f
+    val cellSize: Float = screenWidth/col.toFloat()
 
     var backGround: Bitmap
     var wall: Bitmap
@@ -172,8 +171,10 @@ class Level(
         colliders.add(collider)
     }
 
-    fun setBallStartPos(_x: Float, _y: Float) {
+    fun setBallStartPosAndSize(_x: Float, _y: Float) {
+        v.ball.radio=((screenWidth/col.toFloat())/2)*0.65f
         v.ball.move(_x, _y)
+
     }
 
     fun draw(canvas: Canvas?) {

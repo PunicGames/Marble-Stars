@@ -8,8 +8,7 @@ import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
-import android.view.ViewGroup
-import android.view.Window
+import android.util.DisplayMetrics
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -62,16 +61,20 @@ class Level_2_Activity : AppCompatActivity() {
             //////////////////////////////////////////////////////////////////////////////
             //LEVEL SETUP
         )
-
+        this.window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+        val dm = DisplayMetrics()
+        this.windowManager.defaultDisplay.getMetrics(dm)
 
 
         //Level initialization
         var level2: Level = Level(
             game!!,
-            18,
-            32,
-            1920,
-            1080,
+
+            dm.widthPixels,
+            dm.heightPixels,
             R.drawable.grass,
             R.drawable.wall_tile,
             R.drawable.goal,
@@ -138,7 +141,7 @@ class Level_2_Activity : AppCompatActivity() {
         //game!!.layoutParams = ViewGroup.LayoutParams(1080, 1920)
         setContentView(game)
 
-        level2.setBallStartPos(200f,200f)
+        level2.setBallStartPosAndSize(200f,200f)
 
     }
 
