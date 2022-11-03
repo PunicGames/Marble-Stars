@@ -9,11 +9,9 @@ import android.media.MediaPlayer
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.util.Log
 import androidx.annotation.RequiresApi
 import android.content.Intent
-import androidx.core.graphics.set
-import java.util.concurrent.locks.LockSupport
+import kotlin.math.abs
 
 
 class GameView(context: Context, val vibrator: Vibrator) :
@@ -106,29 +104,38 @@ class GameView(context: Context, val vibrator: Vibrator) :
 
             when (box.type) {
                 Type.wall -> {
+
                     var boxWidth = box.xmax - box.xmin;
                     var boxHeight = box.ymax - box.ymin;
                     var boxXCenter = box.xmin + boxWidth*0.5f;
                     var boxYCenter = box.ymin + boxHeight*0.5f;
 
+                    if(abs(ball.posX - boxXCenter) < abs(ball.posY - boxYCenter)){
+                        ball.speed.x = -ball.speed.x
+                    } else {
+                        ball.speed.y = -ball.speed.y
+                    }
+                    /*
                     if((ball.posX >= boxXCenter) && (ball.posY > boxYCenter - boxHeight) && (ball.posY < (boxYCenter + boxHeight)))// Bola chocando por la derecha de la caja
                     {
                         ball.speed.x= -ball.speed.x
                     }
+
                     if((ball.posX < boxXCenter) && (ball.posY > boxYCenter - boxHeight) && (ball.posY < (boxYCenter + boxHeight)))// Bola chocando por la izquierda de la caja
                     {
                         ball.speed.x= -ball.speed.x
                     }
+
                     if((ball.posY > boxYCenter) && (ball.posX > boxXCenter - boxWidth) && (ball.posX < boxXCenter + boxWidth))// Bola chocando por abajo de la caja
                     {
                         ball.speed.y= -ball.speed.y
-
                     }
+
                     if((ball.posY < boxYCenter) && (ball.posX > boxXCenter - boxWidth) && (ball.posX < boxXCenter + boxWidth))
                     {
                         ball.speed.y=-ball.speed.y
-
                     }
+                    */
                 }
 
                 Type.goal -> {

@@ -56,4 +56,16 @@ class Vector2D (
         this.y = this.y * -1
         return this
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (other == null ||
+                other !is Vector2D ||
+                this.x != other.x || this.y != other.y)
+            return false
+        return true
+    }
+
+    fun dist(p: Vector2D): Float{
+        return (this - p).magnitude
+    }
 }
