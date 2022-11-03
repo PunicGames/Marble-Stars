@@ -12,6 +12,7 @@ import android.os.Vibrator
 import androidx.annotation.RequiresApi
 import android.content.Intent
 import kotlin.math.abs
+import java.time.LocalDateTime
 
 
 class GameView(context: Context, val vibrator: Vibrator) :
@@ -36,7 +37,8 @@ class GameView(context: Context, val vibrator: Vibrator) :
 
     //Points
     var points: Int = 0
-
+    @RequiresApi(Build.VERSION_CODES.O)
+    val initTime = LocalDateTime.now()
 
     init {
         //Sounds
@@ -100,6 +102,7 @@ class GameView(context: Context, val vibrator: Vibrator) :
         checkCollisions()
 
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     fun resolveCollision(ball: Ball, box: BoxCollider, x: Float, y:Float){
 
             when (box.type) {
@@ -141,7 +144,13 @@ class GameView(context: Context, val vibrator: Vibrator) :
                 Type.goal -> {
                     //Obtener puntos y finalizar partida
                     DeactivateSounds();
-                    val intent = Intent(context, LevelSelectionActivity::class.java)
+                    val intent = Intent(context, ResumeLevel::class.java)
+                    val finishTime = LocalDateTime.now()
+                    var minutes = finishTime.minute - initTime.minute
+                    var seconds = finishTime.second - initTime.second
+                    intent.putExtra("points", points)
+                    intent.putExtra("minutes", minutes)
+                    intent.putExtra("seconds", seconds)
                     context.startActivity(intent);
                 }
 
