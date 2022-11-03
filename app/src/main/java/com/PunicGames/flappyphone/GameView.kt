@@ -108,17 +108,47 @@ class GameView(context: Context, val vibrator: Vibrator) :
             when (box.type) {
                 Type.wall -> {
 
+                    // Version Javi R.
+
+                    var bottomOfBall = ball.posY - (ball.radio)
+                    var topOfBall = ball.posY + (ball.radio)
+                    var leftSideOfBall = ball.posX - (ball.radio)
+                    var rightSideOfBall = ball.posX + (ball.radio)
+
+                    var topOfObject = box.ymin
+                    var leftSideOfObject = box.xmin
+                    var rightSideOfObject = box.ymin
+                    var bottomOfObject = box.ymax
+
+                    if ((ball.speed.y < 0 && bottomOfObject - topOfBall < rightSideOfBall - leftSideOfObject) ||
+                        (ball.speed.y < 0 && bottomOfObject - topOfBall < rightSideOfObject - leftSideOfBall) ||
+                        (ball.speed.y > 0 && bottomOfBall - topOfObject < rightSideOfBall - leftSideOfObject) ||
+                        (ball.speed.y > 0 && bottomOfBall - topOfObject < rightSideOfObject - leftSideOfBall)) {
+                        if (ball.speed.y > 0)
+                            ball.posY -= 10
+                        else
+                            ball.posY += 10
+                        ball.speed.y = -ball.speed.y
+
+                    } else if ((ball.speed.x > 0 &&
+                                bottomOfObject - topOfBall > rightSideOfBall - leftSideOfObject) || (ball.speed.x < 0 &&
+                                bottomOfObject - topOfBall > rightSideOfObject - leftSideOfBall) || (ball.speed.x > 0 &&
+                                bottomOfBall - topOfObject > rightSideOfBall - leftSideOfObject) || (ball.speed.x < 0 &&
+                                bottomOfBall - topOfObject > rightSideOfObject - leftSideOfBall)) {
+                        if (ball.speed.x > 0)
+                            ball.posX -= 10
+                        else
+                            ball.posX += 10
+                        ball.speed.x = -ball.speed.x
+                    }
+
+                    // Version JAVI S.
+                    /*
                     var boxWidth = box.xmax - box.xmin;
                     var boxHeight = box.ymax - box.ymin;
                     var boxXCenter = box.xmin + boxWidth*0.5f;
                     var boxYCenter = box.ymin + boxHeight*0.5f;
 
-                    if(abs(ball.posX - boxXCenter) < abs(ball.posY - boxYCenter)){
-                        ball.speed.x = -ball.speed.x
-                    } else {
-                        ball.speed.y = -ball.speed.y
-                    }
-                    /*
                     if((ball.posX >= boxXCenter) && (ball.posY > boxYCenter - boxHeight) && (ball.posY < (boxYCenter + boxHeight)))// Bola chocando por la derecha de la caja
                     {
                         ball.speed.x= -ball.speed.x
@@ -233,7 +263,7 @@ class GameView(context: Context, val vibrator: Vibrator) :
     @RequiresApi(Build.VERSION_CODES.O)
     fun vibrate() {
         val vibration: VibrationEffect
-        vibration = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE)
+        vibration = VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE)
         vibrator.cancel()
         vibrator.vibrate(vibration)
     }
