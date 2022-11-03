@@ -47,7 +47,7 @@ class LevelSelectionActivity : AppCompatActivity() {
         var lvl4 : Button = findViewById(R.id.lvl4_button)
         lvl4.setOnClickListener {
 
-            val intent = Intent(context, Level_4_Activity::class.java)
+            val intent = Intent(context, Test_Activity::class.java)
 
             startActivity(intent)
             finish()
