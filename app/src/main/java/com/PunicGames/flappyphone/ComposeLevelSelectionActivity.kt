@@ -177,7 +177,7 @@ fun BackButton(){
             pressedElevation = 15.dp,
             disabledElevation = 0.dp
         ),
-        onClick = { mContext.startActivity(Intent(mContext, MainMenuActivity::class.java)) }
+        onClick = { mContext.startActivity(Intent(mContext, ComposeMainMenu::class.java)) }
     ) {
         Text(
             text = "Back",
@@ -191,10 +191,7 @@ fun BackButton(){
 @Composable
 fun LevelSelectionContent(){
 
-    val configuration = LocalConfiguration.current
-
-    val screenWidth = configuration.screenWidthDp.dp
-    val screenHeight = configuration.screenHeightDp.dp
+    ImageBackground()
 
     Column(
         modifier = Modifier
@@ -211,26 +208,6 @@ fun LevelSelectionContent(){
             fontSize = 36.sp
         )
 
-        /*
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly
-        ) {
-
-            Level1Button()
-
-            Level2Button()
-
-            Level3Button()
-
-            Level4Button()
-
-            BackButton()
-        }
-*/
-
         Row(
             modifier = Modifier
                 //.background(Color.Red)
@@ -240,7 +217,7 @@ fun LevelSelectionContent(){
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f)
-                    .background(Color.Blue)
+                    //.background(Color.Blue)
 
             ) {
 
@@ -250,7 +227,7 @@ fun LevelSelectionContent(){
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(3f)
-                    .background(Color.Green)
+                    //.background(Color.Green)
 
             ) {
                 //Hueco 1
@@ -258,7 +235,7 @@ fun LevelSelectionContent(){
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .background(Color.Blue)
+                        //.background(Color.Blue)
                 ) {
 
                 }
@@ -268,7 +245,7 @@ fun LevelSelectionContent(){
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .background(Color.Green)
+                        //.background(Color.Green)
                 ) {
                     Level1Button()
 
@@ -279,7 +256,7 @@ fun LevelSelectionContent(){
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .background(Color.Blue)
+                        //.background(Color.Blue)
                 ) {
 
                 }
@@ -289,7 +266,7 @@ fun LevelSelectionContent(){
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .background(Color.Green)
+                        //.background(Color.Green)
                 ) {
                     Level2Button()
 
@@ -300,7 +277,7 @@ fun LevelSelectionContent(){
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .background(Color.Blue)
+                        //.background(Color.Blue)
                 ) {
 
                 }
@@ -310,7 +287,7 @@ fun LevelSelectionContent(){
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .background(Color.Green)
+                        //.background(Color.Green)
                 ) {
                     Level3Button()
 
@@ -321,7 +298,7 @@ fun LevelSelectionContent(){
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .background(Color.Blue)
+                        //.background(Color.Blue)
                 ) {
 
                 }
@@ -331,7 +308,7 @@ fun LevelSelectionContent(){
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .background(Color.Green)
+                        //.background(Color.Green)
                 ) {
                     Level4Button()
 
@@ -342,7 +319,7 @@ fun LevelSelectionContent(){
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .background(Color.Blue)
+                        //.background(Color.Blue)
                 ) {
 
                 }
@@ -352,7 +329,7 @@ fun LevelSelectionContent(){
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .background(Color.Green)
+                        //.background(Color.Green)
                 ) {
                     BackButton()
 
@@ -363,7 +340,7 @@ fun LevelSelectionContent(){
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .background(Color.Blue)
+                        //.background(Color.Blue)
                 ) {
 
                 }
@@ -374,7 +351,7 @@ fun LevelSelectionContent(){
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f)
-                    .background(Color.Blue)
+                    //.background(Color.Blue)
 
             ) {
 

@@ -57,7 +57,7 @@ class Level_4_Activity : AppCompatActivity() {
 
         var back: Button = findViewById(R.id.back_button)
         back.setOnClickListener {
-            val intent = Intent(this, MainMenuActivity::class.java)
+            val intent = Intent(this, ComposeMainMenu::class.java)
             startActivity(intent)
             mSensorManager.unregisterListener(sensorEventListener)
             finish()
