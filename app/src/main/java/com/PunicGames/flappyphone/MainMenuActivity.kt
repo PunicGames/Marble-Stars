@@ -19,7 +19,7 @@ class MainMenuActivity : AppCompatActivity() {
         var btn : Button = findViewById(R.id.mainButton)
         var context = this
         btn.setOnClickListener {
-            val intent = Intent(context, LevelSelectionActivity::class.java)
+            val intent = Intent(context, ComposeLevelSelectionActivity::class.java)
             startActivity(intent)
             finish()
         }

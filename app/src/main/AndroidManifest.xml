@@ -58,16 +58,16 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Level_2_Activity"
-            android:configChanges="orientation"
+            android:name=".ComposeLevelSelectionActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:label="ComposeLevelSelectionActivity"
+            android:theme="@style/Theme.FlappyPhone">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Level_3_Activity"
+            android:name=".Level_2_Activity"
             android:configChanges="orientation"
             android:exported="false"
             android:screenOrientation="portrait">
