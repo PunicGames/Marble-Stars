@@ -15,7 +15,7 @@ class ResumeLevel : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_resume_level)
+        setContentView(R.layout.level_resume_layout)
 
         var bundle = intent.extras
         var puntos = bundle?.getInt("points");

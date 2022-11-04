@@ -1,31 +1,33 @@
 package com.PunicGames.flappyphone
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
-import android.view.View
 import android.graphics.Paint
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.AttributeSet
+import android.view.View
 import androidx.annotation.RequiresApi
-import android.content.Intent
-import kotlin.math.abs
 import java.time.LocalDateTime
 
-
-class GameView(context: Context, val vibrator: Vibrator) :
-    View(context) {
+class GameView @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr) {
 
     //Accelerometer variables and vibrator
     val TimeStep: Float = 0.2f
+    var vibrator: Vibrator? = null
 
     //Music and SFX
     private lateinit var collisionMediaPlayer: MediaPlayer
     private lateinit var backgroundMediaPlayer: MediaPlayer
     private lateinit var starMediaPlayer: MediaPlayer
     private lateinit var rollingBallPlayer: MediaPlayer
+
 
 
     //Ball
@@ -61,18 +63,26 @@ class GameView(context: Context, val vibrator: Vibrator) :
             rollingBallPlayer.isLooping = true;
             rollingBallPlayer.setVolume(0.0f, 0.0f);
         }
-
-
         ballPaint.color = Color.RED
     }
 
-
+/*
     override fun draw(canvas: Canvas?) {
         super.draw(canvas)
+    }
+
+ */
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
         level?.draw(canvas)
         ball.draw(canvas)
         invalidate()
-        //Log.d(height.toString(), "Height")
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -105,114 +115,114 @@ class GameView(context: Context, val vibrator: Vibrator) :
     @RequiresApi(Build.VERSION_CODES.O)
     fun resolveCollision(ball: Ball, box: BoxCollider, x: Float, y:Float){
 
-            when (box.type) {
-                Type.wall -> {
+        when (box.type) {
+            Type.wall -> {
 
-                    // Version Javi R.
+                // Version Javi R.
 
-                    var bottomOfBall = ball.posY - (ball.radio)
-                    var topOfBall = ball.posY + (ball.radio)
-                    var leftSideOfBall = ball.posX - (ball.radio)
-                    var rightSideOfBall = ball.posX + (ball.radio)
+                var bottomOfBall = ball.posY - (ball.radio)
+                var topOfBall = ball.posY + (ball.radio)
+                var leftSideOfBall = ball.posX - (ball.radio)
+                var rightSideOfBall = ball.posX + (ball.radio)
 
-                    var topOfObject = box.ymin
-                    var leftSideOfObject = box.xmin
-                    var rightSideOfObject = box.ymin
-                    var bottomOfObject = box.ymax
+                var topOfObject = box.ymin
+                var leftSideOfObject = box.xmin
+                var rightSideOfObject = box.ymin
+                var bottomOfObject = box.ymax
 
-                    if ((ball.speed.y < 0 && bottomOfObject - topOfBall < rightSideOfBall - leftSideOfObject) ||
-                        (ball.speed.y < 0 && bottomOfObject - topOfBall < rightSideOfObject - leftSideOfBall) ||
-                        (ball.speed.y > 0 && bottomOfBall - topOfObject < rightSideOfBall - leftSideOfObject) ||
-                        (ball.speed.y > 0 && bottomOfBall - topOfObject < rightSideOfObject - leftSideOfBall)) {
-                        if (ball.speed.y > 0)
-                            ball.posY -= 10
-                        else
-                            ball.posY += 10
-                        ball.speed.y = -ball.speed.y
+                if ((ball.speed.y < 0 && bottomOfObject - topOfBall < rightSideOfBall - leftSideOfObject) ||
+                    (ball.speed.y < 0 && bottomOfObject - topOfBall < rightSideOfObject - leftSideOfBall) ||
+                    (ball.speed.y > 0 && bottomOfBall - topOfObject < rightSideOfBall - leftSideOfObject) ||
+                    (ball.speed.y > 0 && bottomOfBall - topOfObject < rightSideOfObject - leftSideOfBall)) {
+                    if (ball.speed.y > 0)
+                        ball.posY -= 10
+                    else
+                        ball.posY += 10
+                    ball.speed.y = -ball.speed.y
 
-                    } else if ((ball.speed.x > 0 &&
-                                bottomOfObject - topOfBall > rightSideOfBall - leftSideOfObject) || (ball.speed.x < 0 &&
-                                bottomOfObject - topOfBall > rightSideOfObject - leftSideOfBall) || (ball.speed.x > 0 &&
-                                bottomOfBall - topOfObject > rightSideOfBall - leftSideOfObject) || (ball.speed.x < 0 &&
-                                bottomOfBall - topOfObject > rightSideOfObject - leftSideOfBall)) {
-                        if (ball.speed.x > 0)
-                            ball.posX -= 10
-                        else
-                            ball.posX += 10
-                        ball.speed.x = -ball.speed.x
-                    }
-
-                    // Version JAVI S.
-                    /*
-                    var boxWidth = box.xmax - box.xmin;
-                    var boxHeight = box.ymax - box.ymin;
-                    var boxXCenter = box.xmin + boxWidth*0.5f;
-                    var boxYCenter = box.ymin + boxHeight*0.5f;
-
-                    if((ball.posX >= boxXCenter) && (ball.posY > boxYCenter - boxHeight) && (ball.posY < (boxYCenter + boxHeight)))// Bola chocando por la derecha de la caja
-                    {
-                        ball.speed.x= -ball.speed.x
-                    }
-
-                    if((ball.posX < boxXCenter) && (ball.posY > boxYCenter - boxHeight) && (ball.posY < (boxYCenter + boxHeight)))// Bola chocando por la izquierda de la caja
-                    {
-                        ball.speed.x= -ball.speed.x
-                    }
-
-                    if((ball.posY > boxYCenter) && (ball.posX > boxXCenter - boxWidth) && (ball.posX < boxXCenter + boxWidth))// Bola chocando por abajo de la caja
-                    {
-                        ball.speed.y= -ball.speed.y
-                    }
-
-                    if((ball.posY < boxYCenter) && (ball.posX > boxXCenter - boxWidth) && (ball.posX < boxXCenter + boxWidth))
-                    {
-                        ball.speed.y=-ball.speed.y
-                    }
-                    */
+                } else if ((ball.speed.x > 0 &&
+                            bottomOfObject - topOfBall > rightSideOfBall - leftSideOfObject) || (ball.speed.x < 0 &&
+                            bottomOfObject - topOfBall > rightSideOfObject - leftSideOfBall) || (ball.speed.x > 0 &&
+                            bottomOfBall - topOfObject > rightSideOfBall - leftSideOfObject) || (ball.speed.x < 0 &&
+                            bottomOfBall - topOfObject > rightSideOfObject - leftSideOfBall)) {
+                    if (ball.speed.x > 0)
+                        ball.posX -= 10
+                    else
+                        ball.posX += 10
+                    ball.speed.x = -ball.speed.x
                 }
 
-                Type.goal -> {
-                    //Obtener puntos y finalizar partida
-                    DeactivateSounds();
-                    val intent = Intent(context, ResumeLevel::class.java)
-                    val finishTime = LocalDateTime.now()
-                    var initTimeInSeconds = initTime.minute * 60 + initTime.second;
-                    var finishTimeInSeconds = finishTime.minute * 60 + finishTime.second;
-                    var totalSeconds = finishTimeInSeconds - initTimeInSeconds;
-                    var minutes = (totalSeconds / 60).toInt()
-                    var seconds = totalSeconds - minutes * 60
-                    intent.putExtra("points", points)
-                    intent.putExtra("minutes", minutes)
-                    intent.putExtra("seconds", seconds)
-                    context.startActivity(intent);
+                // Version JAVI S.
+                /*
+                var boxWidth = box.xmax - box.xmin;
+                var boxHeight = box.ymax - box.ymin;
+                var boxXCenter = box.xmin + boxWidth*0.5f;
+                var boxYCenter = box.ymin + boxHeight*0.5f;
+
+                if((ball.posX >= boxXCenter) && (ball.posY > boxYCenter - boxHeight) && (ball.posY < (boxYCenter + boxHeight)))// Bola chocando por la derecha de la caja
+                {
+                    ball.speed.x= -ball.speed.x
                 }
 
-                Type.star -> {
-                    if(!box.tile.collected){
-                        // Sonido
-                        if (starMediaPlayer.isPlaying) {
-                            starMediaPlayer.seekTo(0)
-                        }
-                        starMediaPlayer.start();
+                if((ball.posX < boxXCenter) && (ball.posY > boxYCenter - boxHeight) && (ball.posY < (boxYCenter + boxHeight)))// Bola chocando por la izquierda de la caja
+                {
+                    ball.speed.x= -ball.speed.x
+                }
 
-                        //Obtener puntos
-                        points += 1 ;
-                        box.tile.collected = true;
-                        box.tile.posX = -100f;
+                if((ball.posY > boxYCenter) && (ball.posX > boxXCenter - boxWidth) && (ball.posX < boxXCenter + boxWidth))// Bola chocando por abajo de la caja
+                {
+                    ball.speed.y= -ball.speed.y
+                }
+
+                if((ball.posY < boxYCenter) && (ball.posX > boxXCenter - boxWidth) && (ball.posX < boxXCenter + boxWidth))
+                {
+                    ball.speed.y=-ball.speed.y
+                }
+                */
+            }
+
+            Type.goal -> {
+                //Obtener puntos y finalizar partida
+                DeactivateSounds();
+                val intent = Intent(context, ResumeLevel::class.java)
+                val finishTime = LocalDateTime.now()
+                var initTimeInSeconds = initTime.minute * 60 + initTime.second;
+                var finishTimeInSeconds = finishTime.minute * 60 + finishTime.second;
+                var totalSeconds = finishTimeInSeconds - initTimeInSeconds;
+                var minutes = (totalSeconds / 60).toInt()
+                var seconds = totalSeconds - minutes * 60
+                intent.putExtra("points", points)
+                intent.putExtra("minutes", minutes)
+                intent.putExtra("seconds", seconds)
+                context.startActivity(intent);
+            }
+
+            Type.star -> {
+                if(!box.tile.collected){
+                    // Sonido
+                    if (starMediaPlayer.isPlaying) {
+                        starMediaPlayer.seekTo(0)
                     }
-                }
+                    starMediaPlayer.start();
 
-                Type.hole -> {
-                    //Perder o bajar vida o devolver al inicio
-                    ball.posX = 120f;
-                    ball.posY = 120f;
+                    //Obtener puntos
+                    points += 1 ;
+                    box.tile.collected = true;
+                    box.tile.posX = -100f;
                 }
+            }
 
-                else -> {
+            Type.hole -> {
+                //Perder o bajar vida o devolver al inicio
+                ball.posX = 120f;
+                ball.posY = 120f;
+            }
 
-                }
+            else -> {
 
             }
+
+        }
         /*
         var acel = Vector2D(x  * -1, y)
 
@@ -242,20 +252,24 @@ class GameView(context: Context, val vibrator: Vibrator) :
     }
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkCollisions(){
-        for (i in 0..level?.colliders!!.size - 1) {
 
-            if (level?.colliders!![i].checkCollision(ball)) {
-                // Colision con muro
-                if (level?.colliders!![i].type == Type.wall) {
-                    vibrate()
+        if(level!=null) { //If level is not already created
 
-                    if (collisionMediaPlayer.isPlaying) {
-                        collisionMediaPlayer.seekTo(0)
+            for (i in 0..level?.colliders!!.size - 1) {
+
+                if (level?.colliders!![i].checkCollision(ball)) {
+                    // Colision con muro
+                    if (level?.colliders!![i].type == Type.wall) {
+                        vibrate()
+
+                        if (collisionMediaPlayer.isPlaying) {
+                            collisionMediaPlayer.seekTo(0)
+                        }
+                        collisionMediaPlayer.start();
                     }
-                    collisionMediaPlayer.start();
-                }
 
-                resolveCollision(ball, level?.colliders!![i], x, y)
+                    resolveCollision(ball, level?.colliders!![i], x, y)
+                }
             }
         }
     }
@@ -264,8 +278,8 @@ class GameView(context: Context, val vibrator: Vibrator) :
     fun vibrate() {
         val vibration: VibrationEffect
         vibration = VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE)
-        vibrator.cancel()
-        vibrator.vibrate(vibration)
+        vibrator?.cancel()
+        vibrator?.vibrate(vibration)
     }
 
     fun DeactivateSounds(){
