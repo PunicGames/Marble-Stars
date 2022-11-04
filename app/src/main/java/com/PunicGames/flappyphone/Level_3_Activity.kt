@@ -9,13 +9,11 @@ import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
-import android.view.View
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.WindowManager
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import java.nio.file.Files.delete
 
 
 class Level_3_Activity : AppCompatActivity() {
@@ -76,9 +74,9 @@ class Level_3_Activity : AppCompatActivity() {
                     game!!.height,
                     R.drawable.background,
                     R.drawable.woodwall,
-                    R.drawable.estrellla2,
-                    R.drawable.estrellla1,
-                    R.drawable.holewall
+                    R.drawable.goal,
+                    R.drawable.estrella,
+                    R.drawable.hole
                 )
 
                 game!!.level = level3
