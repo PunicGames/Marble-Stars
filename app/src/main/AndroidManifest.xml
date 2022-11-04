@@ -67,6 +67,15 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ComposeMainMenu"
+            android:exported="false"
+            android:label="ComposeMainMenu"
+            android:theme="@style/Theme.FlappyPhone">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Level_2_Activity"
             android:configChanges="orientation"
             android:exported="false"
