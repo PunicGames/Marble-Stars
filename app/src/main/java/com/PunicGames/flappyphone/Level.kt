@@ -21,14 +21,15 @@ class Level(
 
     val col: Int = 18
     val row: Int = 32
-    val screenWidth : Int = screenWidth
-
+    val screenWidth: Int = screenWidth
 
 
     val cells = ArrayList<Cell>()
     val colliders = ArrayList<BoxCollider>()
+    val starColliders = ArrayList<BoxCollider>()
+
     //val cellSize: Float = 60f
-    val cellSize: Float = screenWidth/col.toFloat()
+    val cellSize: Float = screenWidth / col.toFloat()
 
     var backGround: Bitmap
     var wall: Bitmap
@@ -114,11 +115,12 @@ class Level(
             _col * cellSize,
             _col * cellSize + cellSize,
             _row * cellSize,
-            _row * cellSize+ cellSize
+            _row * cellSize + cellSize
         )
 
         colliders.add(collider)
     }
+
     fun setStar(_row: Int, _col: Int) {
 
         //Bitmap tile
@@ -136,12 +138,13 @@ class Level(
         var collider = BoxCollider(
             Type.star,
             _col * cellSize,
-            _col * cellSize+ cellSize,
+            _col * cellSize + cellSize,
             _row * cellSize,
-            _row * cellSize+ cellSize
+            _row * cellSize + cellSize
         )
         collider.tile = starTile
         colliders.add(collider)
+        starColliders.add(collider)
     }
 
     fun setHole(_row: Int, _col: Int) {
@@ -161,16 +164,16 @@ class Level(
         var collider = BoxCollider(
             Type.hole,
             _col * cellSize,
-            _col * cellSize+ cellSize,
+            _col * cellSize + cellSize,
             _row * cellSize,
-            _row * cellSize+ cellSize
+            _row * cellSize + cellSize
         )
 
         colliders.add(collider)
     }
 
     fun setBallStartPosAndSize(_x: Float, _y: Float) {
-        v.ball.radio=((screenWidth/col.toFloat())/2)*0.65f
+        v.ball.radio = ((screenWidth / col.toFloat()) / 2) * 0.65f
         v.ball.move(_x, _y)
 
     }
@@ -180,10 +183,11 @@ class Level(
         //canvas?.drawBitmap(walkable, 0f, 0f, null)
         //canvas?.drawColor(Color.WHITE)
 
-        canvas?.drawBitmap(backGround,0.0f,0.0f,null)
+        canvas?.drawBitmap(backGround, 0.0f, 0.0f, null)
 
         for (i in 0..cells.size - 1) {
-            canvas?.drawBitmap(cells[i].bitmap, cells[i].posX, cells[i].posY, null)
+            if (!cells[i].collected)
+                canvas?.drawBitmap(cells[i].bitmap, cells[i].posX, cells[i].posY, null)
         }
     }
 

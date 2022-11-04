@@ -9,7 +9,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher_round"
-        android:label="@string/app_name"
+        android:label="Marble Stars"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Material3.Dark.NoActionBar"
@@ -58,16 +58,16 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Level_2_Activity"
-            android:configChanges="orientation"
+            android:name=".ComposeLevelSelectionActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:label="ComposeLevelSelectionActivity"
+            android:theme="@style/Theme.FlappyPhone">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Level_3_Activity"
+            android:name=".Level_2_Activity"
             android:configChanges="orientation"
             android:exported="false"
             android:screenOrientation="portrait">
