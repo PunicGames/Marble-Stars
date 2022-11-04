@@ -208,7 +208,8 @@ class GameView @JvmOverloads constructor(
                     //Obtener puntos
                     points += 1 ;
                     box.tile.collected = true;
-                    box.tile.posX = -100f;
+                    //box.tile.posX = -100f;
+
                 }
             }
 
@@ -216,6 +217,12 @@ class GameView @JvmOverloads constructor(
                 //Perder o bajar vida o devolver al inicio
                 ball.posX = 120f;
                 ball.posY = 120f;
+                points = 0
+                for (i in 0..level?.starColliders!!.size - 1){
+                    level?.starColliders!![i].tile.collected = false
+                }
+
+
             }
 
             else -> {
