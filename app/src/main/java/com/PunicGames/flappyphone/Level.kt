@@ -19,8 +19,6 @@ class Level(
 
     var v: GameView = view
 
-
-
     val col: Int = 18
     val row: Int = 32
     val screenWidth : Int = screenWidth
@@ -42,7 +40,7 @@ class Level(
     init {
 
         backGround = BitmapFactory.decodeResource(v.resources, _backgroundImageID)
-        backGround = Bitmap.createScaledBitmap(backGround, screenHeight, screenWidth, false)
+        backGround = Bitmap.createScaledBitmap(backGround, screenWidth, screenHeight, false)
 
         wall = BitmapFactory.decodeResource(v.resources, _wallTileID)
         wall = Bitmap.createScaledBitmap(wall, cellSize.toInt(), cellSize.toInt(), true)
@@ -180,7 +178,9 @@ class Level(
     fun draw(canvas: Canvas?) {
 
         //canvas?.drawBitmap(walkable, 0f, 0f, null)
-        canvas?.drawColor(Color.WHITE)
+        //canvas?.drawColor(Color.WHITE)
+
+        canvas?.drawBitmap(backGround,0.0f,0.0f,null)
 
         for (i in 0..cells.size - 1) {
             canvas?.drawBitmap(cells[i].bitmap, cells[i].posX, cells[i].posY, null)

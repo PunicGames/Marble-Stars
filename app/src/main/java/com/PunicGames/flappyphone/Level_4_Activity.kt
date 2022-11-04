@@ -74,11 +74,11 @@ class Level_4_Activity : AppCompatActivity() {
                     game!!,
                     game!!.width,
                     game!!.height,
-                    R.drawable.grass,
-                    R.drawable.wall_tile,
-                    R.drawable.goal,
-                    R.drawable.star,
-                    R.drawable.hole
+                    R.drawable.background,
+                    R.drawable.woodwall,
+                    R.drawable.estrellla2,
+                    R.drawable.estrellla1,
+                    R.drawable.holewall
                 )
 
                 game!!.level = level4

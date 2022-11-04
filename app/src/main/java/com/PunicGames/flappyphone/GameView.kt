@@ -138,7 +138,7 @@ class GameView @JvmOverloads constructor(
                         ball.posY -= 10
                     else
                         ball.posY += 10
-                    ball.speed.y = -ball.speed.y
+                    ball.speed.y *= -0.9f
 
                 } else if ((ball.speed.x > 0 &&
                             bottomOfObject - topOfBall > rightSideOfBall - leftSideOfObject) || (ball.speed.x < 0 &&
@@ -149,7 +149,7 @@ class GameView @JvmOverloads constructor(
                         ball.posX -= 10
                     else
                         ball.posX += 10
-                    ball.speed.x = -ball.speed.x
+                    ball.speed.x *= -0.9f
                 }
 
                 // Version JAVI S.

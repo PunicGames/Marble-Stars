@@ -75,11 +75,11 @@ class Level_2_Activity : AppCompatActivity() {
 
                     game!!.width,
                     game!!.height,
-                    R.drawable.grass,
-                    R.drawable.wall_tile,
-                    R.drawable.goal,
-                    R.drawable.star,
-                    R.drawable.hole
+                    R.drawable.background,
+                    R.drawable.woodwall,
+                    R.drawable.estrellla2,
+                    R.drawable.estrellla1,
+                    R.drawable.holewall
                 )
 
                 game!!.level = level2
