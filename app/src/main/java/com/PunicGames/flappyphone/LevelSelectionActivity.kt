@@ -1,10 +1,8 @@
 package com.PunicGames.flappyphone
 
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 
@@ -15,7 +13,7 @@ class LevelSelectionActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.level_selection)
+        setContentView(R.layout.level_selection_layout)
         //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         var context = this
@@ -47,7 +45,7 @@ class LevelSelectionActivity : AppCompatActivity() {
         var lvl4 : Button = findViewById(R.id.lvl4_button)
         lvl4.setOnClickListener {
 
-            val intent = Intent(context, Test_Activity::class.java)
+            val intent = Intent(context, Level_4_Activity::class.java)
 
             startActivity(intent)
             finish()

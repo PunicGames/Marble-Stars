@@ -30,9 +30,6 @@ class BoxCollider(
         var collisionX = (xmax >= b.posX) && (b.posX >= xmin)
         var collisionY = (ymax >= b.posY) && (b.posY >= ymin)
 
-        // SQUARE to CIRCLE collision
-        //var collisionX = (xmax >= b.posX + b.radio) && (b.posX - b.radio >= xmin)
-        //var collisionY = (ymax >= b.posY + b.radio) && (b.posY - b.radio >= ymin)
 
         return collisionX && collisionY
     }
@@ -71,7 +68,6 @@ class BoxCollider(
     }
 
 
-    // Funciones de apoyo (Debería ir en una clase Utils)
     fun clamp(value: Float, min: Float, max: Float): Float {
         return max(min, min(max, value))
     }
