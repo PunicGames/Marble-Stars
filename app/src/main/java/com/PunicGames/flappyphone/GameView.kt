@@ -119,9 +119,8 @@ class GameView @JvmOverloads constructor(
             Type.wall -> {
 
                 // Version Javi R.
-
-                var bottomOfBall = ball.posY - (ball.radio)
-                var topOfBall = ball.posY + (ball.radio)
+                var bottomOfBall = ball.posY + (ball.radio)
+                var topOfBall = ball.posY - (ball.radio)
                 var leftSideOfBall = ball.posX - (ball.radio)
                 var rightSideOfBall = ball.posX + (ball.radio)
 
@@ -130,25 +129,43 @@ class GameView @JvmOverloads constructor(
                 var rightSideOfObject = box.ymin
                 var bottomOfObject = box.ymax
 
-                if ((ball.speed.y < 0 && bottomOfObject - topOfBall < rightSideOfBall - leftSideOfObject) ||
-                    (ball.speed.y < 0 && bottomOfObject - topOfBall < rightSideOfObject - leftSideOfBall) ||
-                    (ball.speed.y > 0 && bottomOfBall - topOfObject < rightSideOfBall - leftSideOfObject) ||
-                    (ball.speed.y > 0 && bottomOfBall - topOfObject < rightSideOfObject - leftSideOfBall)) {
+                if ((ball.speed.x >= 0 &&
+                            ball.speed.y < 0 &&
+                            bottomOfObject - topOfBall < rightSideOfBall - leftSideOfObject) ||
+                    (ball.speed.x <= 0 &&
+                            ball.speed.y < 0 &&
+                            bottomOfObject - topOfBall < rightSideOfObject - leftSideOfBall) ||
+                    (ball.speed.x >= 0 &&
+                            ball.speed.y > 0 &&
+                            bottomOfBall - topOfObject < rightSideOfBall - leftSideOfObject) ||
+                    (ball.speed.x <= 0 &&
+                            ball.speed.y > 0 &&
+                            bottomOfBall - topOfObject < rightSideOfObject - leftSideOfBall)
+                ) {
                     if (ball.speed.y > 0)
-                        ball.posY -= 10
+                        ball.posY -= ball.radio
                     else
-                        ball.posY += 10
+                        ball.posY += ball.radio
                     ball.speed.y *= -0.9f
 
-                } else if ((ball.speed.x > 0 &&
-                            bottomOfObject - topOfBall > rightSideOfBall - leftSideOfObject) || (ball.speed.x < 0 &&
-                            bottomOfObject - topOfBall > rightSideOfObject - leftSideOfBall) || (ball.speed.x > 0 &&
-                            bottomOfBall - topOfObject > rightSideOfBall - leftSideOfObject) || (ball.speed.x < 0 &&
-                            bottomOfBall - topOfObject > rightSideOfObject - leftSideOfBall)) {
+                }
+                if ((ball.speed.x > 0 &&
+                            ball.speed.y <= 0 &&
+                            bottomOfObject - topOfBall > rightSideOfBall - leftSideOfObject) ||
+                    (ball.speed.x < 0 &&
+                            ball.speed.y <= 0 &&
+                            bottomOfObject - topOfBall > rightSideOfObject - leftSideOfBall) ||
+                    (ball.speed.x > 0 &&
+                            ball.speed.y >= 0 &&
+                            bottomOfBall - topOfObject > rightSideOfBall - leftSideOfObject) ||
+                    (ball.speed.x < 0 &&
+                            ball.speed.y >= 0 &&
+                            bottomOfBall - topOfObject > rightSideOfObject - leftSideOfBall)
+                ) {
                     if (ball.speed.x > 0)
-                        ball.posX -= 10
+                        ball.posX -= ball.radio
                     else
-                        ball.posX += 10
+                        ball.posX += ball.radio
                     ball.speed.x *= -0.9f
                 }
 

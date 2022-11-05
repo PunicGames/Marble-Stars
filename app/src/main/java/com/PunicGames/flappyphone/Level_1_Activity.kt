@@ -104,13 +104,13 @@ class Level_1_Activity : AppCompatActivity() {
                 level1.setTWallBlock(11, 21, 14, 22)
 
                 // Paredes Verticales
-                level1.setTWallBlock(5, 1, 6, 10)
-                level1.setTWallBlock(8, 3, 9, 26)
-                level1.setTWallBlock(4, 16, 5, 26)
+                level1.setTWallBlock(8, 3, 9, 25)
+                level1.setTWallBlock(4, 16, 5, 25)
                 level1.setTWallBlock(13, 26, 14, 31)
                 level1.setTWallBlock(11, 3, 12, 12)
                 level1.setTWallBlock(14, 1, 15, 23)
                 level1.setTWallBlock(16, 27, 17, 28)
+                level1.setTWallBlock(5, 1, 6, 10)
 
                 // Estrellas
                 level1.setStar(30, 16)
