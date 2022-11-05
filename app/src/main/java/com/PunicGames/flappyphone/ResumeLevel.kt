@@ -24,7 +24,7 @@ class ResumeLevel : AppCompatActivity() {
 
         exitButton = findViewById(R.id.salir)
         exitButton!!.setOnClickListener {
-            var intent = Intent(this, LevelSelectionActivity::class.java)
+            var intent = Intent(this, ComposeLevelSelectionActivity::class.java)
             startActivity(intent)
         }
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,8 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,30 +40,8 @@ class ComposeLevelSelectionActivity : ComponentActivity() {
 @Composable
 fun LevelSelectionViewContainer(){
     Scaffold(
-        topBar = { LevelSelectionTopBar()},
         content = { LevelSelectionContent()},
     )
-}
-
-@Composable
-fun LevelSelectionTopBar(){
-    TopAppBar{
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            Text(
-                text = "Marble Stars",
-
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                fontSize = 44.sp
-            )
-        }
-    }
 }
 
 @Composable
@@ -199,14 +180,7 @@ fun LevelSelectionContent(){
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 
-        Text(
-            text = "Select Level",
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 20.dp),
-            fontSize = 36.sp
-        )
+
 
         Row(
             modifier = Modifier
@@ -240,6 +214,32 @@ fun LevelSelectionContent(){
 
                 }
 
+                //Logo menu
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Green)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.select_level),
+                        contentDescription = "Logo",
+                        contentScale = ContentScale.FillWidth,
+                        modifier = Modifier.fillMaxSize()
+                    )
+
+                }
+
+                //Hueco 2
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Blue)
+                ) {
+
+                }
+
                 //Boton 1
                 Row(
                     modifier = Modifier
@@ -251,7 +251,7 @@ fun LevelSelectionContent(){
 
                 }
 
-                //Hueco 2
+                //Hueco 3
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
@@ -272,7 +272,7 @@ fun LevelSelectionContent(){
 
                 }
 
-                //Hueco 3
+                //Hueco 4
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
@@ -293,7 +293,7 @@ fun LevelSelectionContent(){
 
                 }
 
-                //Hueco 4
+                //Hueco 5
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
@@ -314,7 +314,7 @@ fun LevelSelectionContent(){
 
                 }
 
-                //Hueco 5
+                //Hueco 6
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
@@ -335,7 +335,7 @@ fun LevelSelectionContent(){
 
                 }
 
-                //Hueco 6
+                //Hueco 7
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
