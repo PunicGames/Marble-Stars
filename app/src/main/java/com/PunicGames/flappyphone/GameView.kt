@@ -184,7 +184,7 @@ class GameView @JvmOverloads constructor(
             Type.goal -> {
                 //Obtener puntos y finalizar partida
                 DeactivateSounds();
-                val intent = Intent(context, ResumeLevel::class.java)
+                val intent = Intent(context, ComposeResumeLevelActivity::class.java)
                 val finishTime = LocalDateTime.now()
                 var initTimeInSeconds = initTime.minute * 60 + initTime.second;
                 var finishTimeInSeconds = finishTime.minute * 60 + finishTime.second;
