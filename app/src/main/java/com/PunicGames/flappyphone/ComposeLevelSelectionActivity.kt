@@ -4,25 +4,27 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.PunicGames.flappyphone.ui.theme.FlappyPhoneTheme
-import java.time.format.TextStyle
+import com.google.android.material.internal.ViewUtils.dpToPx
+
 
 class ComposeLevelSelectionActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContent {
             LevelSelectionViewContainer()
@@ -30,27 +32,24 @@ class ComposeLevelSelectionActivity : ComponentActivity() {
     }
 }
 
-@Preview
+
+@Preview(showBackground = true, widthDp = 400, heightDp = 800)
 @Composable
 fun LevelSelectionViewContainer(){
     Scaffold(
         topBar = { LevelSelectionTopBar()},
         content = { LevelSelectionContent()},
-        bottomBar = { LevelSelectionBottomBar()}
     )
 }
 
 @Composable
 fun LevelSelectionTopBar(){
     TopAppBar{
-
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxSize()
-
         ) {
-
             Text(
                 text = "Marble Stars",
 
@@ -60,25 +59,6 @@ fun LevelSelectionTopBar(){
                     .weight(1f),
                 fontSize = 44.sp
             )
-
-        }
-
-    }
-
-}
-
-@Composable
-fun LevelSelectionBottomBar(){
-
-    val mContext = LocalContext.current
-
-    BottomAppBar() {
-        IconButton(onClick = {
-            mContext.startActivity(Intent(mContext, MainMenuActivity::class.java))
-        }) {
-            Icon(
-                painter= painterResource(id = R.drawable.ic_baseline_arrow_back_24) ,
-                contentDescription = "Volver atrás")
         }
     }
 }
@@ -86,13 +66,12 @@ fun LevelSelectionBottomBar(){
 @Composable
 fun Level1Button(){
 
+
     val mContext = LocalContext.current
 
     Button(
         modifier = Modifier
-            .padding(vertical = 40.dp)
-            .height(70.dp)
-            .width(200.dp),
+            .fillMaxSize(),
         shape = RoundedCornerShape(30.dp),
         elevation = ButtonDefaults.elevation(
             defaultElevation = 10.dp,
@@ -116,9 +95,7 @@ fun Level2Button(){
 
     Button(
         modifier = Modifier
-            .padding(vertical = 40.dp)
-            .height(70.dp)
-            .width(200.dp),
+            .fillMaxSize(),
         shape = RoundedCornerShape(30.dp),
         elevation = ButtonDefaults.elevation(
             defaultElevation = 10.dp,
@@ -142,9 +119,7 @@ fun Level3Button(){
 
     Button(
         modifier = Modifier
-            .padding(vertical = 40.dp)
-            .height(70.dp)
-            .width(200.dp),
+            .fillMaxSize(),
         shape = RoundedCornerShape(30.dp),
         elevation = ButtonDefaults.elevation(
             defaultElevation = 10.dp,
@@ -160,6 +135,7 @@ fun Level3Button(){
         )
     }
 }
+
 @Composable
 fun Level4Button(){
 
@@ -167,9 +143,7 @@ fun Level4Button(){
 
     Button(
         modifier = Modifier
-            .padding(vertical = 40.dp)
-            .height(70.dp)
-            .width(200.dp),
+            .fillMaxSize(),
         shape = RoundedCornerShape(30.dp),
         elevation = ButtonDefaults.elevation(
             defaultElevation = 10.dp,
@@ -187,15 +161,44 @@ fun Level4Button(){
 }
 
 @Composable
+fun BackButton(){
+
+    val mContext = LocalContext.current
+
+    Button(
+        modifier = Modifier
+            .fillMaxSize(),
+        shape = RoundedCornerShape(30.dp),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color.Gray
+        ),
+        elevation = ButtonDefaults.elevation(
+            defaultElevation = 10.dp,
+            pressedElevation = 15.dp,
+            disabledElevation = 0.dp
+        ),
+        onClick = { mContext.startActivity(Intent(mContext, ComposeMainMenu::class.java)) }
+    ) {
+        Text(
+            text = "Back",
+            color = Color.White,
+            fontSize = 30.sp,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
 fun LevelSelectionContent(){
 
-
+    ImageBackground()
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+
         Text(
             text = "Select Level",
             textAlign = TextAlign.Center,
@@ -205,13 +208,158 @@ fun LevelSelectionContent(){
             fontSize = 36.sp
         )
 
-        Level1Button()
+        Row(
+            modifier = Modifier
+                //.background(Color.Red)
+                .fillMaxSize()
+        ){
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
+                    //.background(Color.Blue)
 
-        Level2Button()
+            ) {
 
-        Level3Button()
+            }
 
-        Level4Button()
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(3f)
+                    //.background(Color.Green)
+
+            ) {
+                //Hueco 1
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Blue)
+                ) {
+
+                }
+
+                //Boton 1
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Green)
+                ) {
+                    Level1Button()
+
+                }
+
+                //Hueco 2
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Blue)
+                ) {
+
+                }
+
+                //Boton 2
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Green)
+                ) {
+                    Level2Button()
+
+                }
+
+                //Hueco 3
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Blue)
+                ) {
+
+                }
+
+                //Boton 3
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Green)
+                ) {
+                    Level3Button()
+
+                }
+
+                //Hueco 4
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Blue)
+                ) {
+
+                }
+
+                //Boton 4
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Green)
+                ) {
+                    Level4Button()
+
+                }
+
+                //Hueco 5
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Blue)
+                ) {
+
+                }
+
+                //Boton 5
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Green)
+                ) {
+                    BackButton()
+
+                }
+
+                //Hueco 6
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        //.background(Color.Blue)
+                ) {
+
+                }
+
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
+                    //.background(Color.Blue)
+
+            ) {
+
+            }
+
+        }
+
+
 
     }
 

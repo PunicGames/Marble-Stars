@@ -66,6 +66,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".Level_2_Activity"
             android:configChanges="orientation"
@@ -85,7 +86,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".ComposeMainMenu"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait">
