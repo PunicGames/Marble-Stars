@@ -1,19 +1,24 @@
 package com.PunicGames.flappyphone
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -27,6 +32,7 @@ import com.google.android.material.internal.ViewUtils.dpToPx
 
 class ComposeLevelSelectionActivity : ComponentActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -41,6 +47,7 @@ class ComposeLevelSelectionActivity : ComponentActivity() {
 }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true, widthDp = 400, heightDp = 800)
 @Composable
 fun LevelSelectionViewContainer(){
@@ -49,136 +56,403 @@ fun LevelSelectionViewContainer(){
     )
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Level1Button(){
 
 
     val mContext = LocalContext.current
 
-    Button(colors = ButtonDefaults.buttonColors(
-        backgroundColor = Color(red = 0, green = 102, blue =255),contentColor = Color.White),
-        modifier = Modifier
-            .fillMaxSize(),
-        shape = RoundedCornerShape(30.dp),
-        elevation = ButtonDefaults.elevation(
-            defaultElevation = 10.dp,
-            pressedElevation = 15.dp,
-            disabledElevation = 0.dp
-        ),
-        onClick = { mContext.startActivity(Intent(mContext, Level_1_Activity::class.java)) }
-    ) {
-        Text(
-            text = "Level 1",
-            fontSize = 30.sp,
-            textAlign = TextAlign.Center
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        Image(
+            painter = painterResource(id = R.drawable.btn),
+            contentDescription = "Boton",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(40))
+                .border(2.dp, Color.Black, RoundedCornerShape(40))
+                .clickable(
+                    onClick = {
+                        mContext.startActivity(
+                            Intent(
+                                mContext,
+                                Level_1_Activity::class.java
+                            )
+                        )
+                    }
+                )
         )
+
+        val aux = 100f
+
+        val customTypeface = LocalContext.current.resources.getFont(R.font.marblefont)
+
+        val textPaintStroke = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.STROKE
+            textSize = aux
+            color = android.graphics.Color.BLACK
+            strokeWidth = 13f
+            strokeMiter= 10f
+            strokeJoin = android.graphics.Paint.Join.ROUND
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        val textPaint = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.FILL
+            textSize = aux
+            color = android.graphics.Color.WHITE
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        Canvas(
+            modifier = Modifier
+                .fillMaxSize(),
+            onDraw = {
+                drawIntoCanvas {
+                    it.nativeCanvas.drawText(
+                        "Level 1",
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaintStroke
+                    )
+                    it.nativeCanvas.drawText(
+                        "Level 1",
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaint
+                    )
+                }
+            }
+        )
+
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Level2Button(){
 
     val mContext = LocalContext.current
 
-    Button(colors = ButtonDefaults.buttonColors(
-        backgroundColor = Color(red = 0, green = 102, blue =255),contentColor = Color.White),
-        modifier = Modifier
-            .fillMaxSize(),
-        shape = RoundedCornerShape(30.dp),
-        elevation = ButtonDefaults.elevation(
-            defaultElevation = 10.dp,
-            pressedElevation = 15.dp,
-            disabledElevation = 0.dp
-        ),
-        onClick = { mContext.startActivity(Intent(mContext, Level_2_Activity::class.java)) }
-    ) {
-        Text(
-            text = "Level 2",
-            fontSize = 30.sp,
-            textAlign = TextAlign.Center
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        Image(
+            painter = painterResource(id = R.drawable.btn),
+            contentDescription = "Boton",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(40))
+                .border(2.dp, Color.Black, RoundedCornerShape(40))
+                .clickable(
+                    onClick = {
+                        mContext.startActivity(
+                            Intent(
+                                mContext,
+                                Level_2_Activity::class.java
+                            )
+                        )
+                    }
+                )
         )
+
+        val aux = 100f
+
+        val customTypeface = LocalContext.current.resources.getFont(R.font.marblefont)
+
+        val textPaintStroke = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.STROKE
+            textSize = aux
+            color = android.graphics.Color.BLACK
+            strokeWidth = 13f
+            strokeMiter= 10f
+            strokeJoin = android.graphics.Paint.Join.ROUND
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        val textPaint = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.FILL
+            textSize = aux
+            color = android.graphics.Color.WHITE
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        Canvas(
+            modifier = Modifier
+                .fillMaxSize(),
+            onDraw = {
+                drawIntoCanvas {
+                    it.nativeCanvas.drawText(
+                        "Level 2",
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaintStroke
+                    )
+                    it.nativeCanvas.drawText(
+                        "Level 2",
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaint
+                    )
+                }
+            }
+        )
+
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Level3Button(){
 
     val mContext = LocalContext.current
 
-    Button(colors = ButtonDefaults.buttonColors(
-        backgroundColor = Color(red = 0, green = 102, blue =255),contentColor = Color.White),
-        modifier = Modifier
-            .fillMaxSize(),
-
-        shape = RoundedCornerShape(30.dp),
-        elevation = ButtonDefaults.elevation(
-            defaultElevation = 10.dp,
-            pressedElevation = 15.dp,
-            disabledElevation = 0.dp
-        ),
-        onClick = { mContext.startActivity(Intent(mContext, Level_3_Activity::class.java)) }
-    ) {
-        Text(
-            text = "Level 3",
-            fontSize = 30.sp,
-            textAlign = TextAlign.Center
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        Image(
+            painter = painterResource(id = R.drawable.btn),
+            contentDescription = "Boton",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(40))
+                .border(2.dp, Color.Black, RoundedCornerShape(40))
+                .clickable(
+                    onClick = {
+                        mContext.startActivity(
+                            Intent(
+                                mContext,
+                                Level_3_Activity::class.java
+                            )
+                        )
+                    }
+                )
         )
+
+        val aux = 100f
+
+        val customTypeface = LocalContext.current.resources.getFont(R.font.marblefont)
+
+        val textPaintStroke = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.STROKE
+            textSize = aux
+            color = android.graphics.Color.BLACK
+            strokeWidth = 13f
+            strokeMiter= 10f
+            strokeJoin = android.graphics.Paint.Join.ROUND
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        val textPaint = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.FILL
+            textSize = aux
+            color = android.graphics.Color.WHITE
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        Canvas(
+            modifier = Modifier
+                .fillMaxSize(),
+            onDraw = {
+                drawIntoCanvas {
+                    it.nativeCanvas.drawText(
+                        "Level 3",
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaintStroke
+                    )
+                    it.nativeCanvas.drawText(
+                        "Level 3",
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaint
+                    )
+                }
+            }
+        )
+
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Level4Button(){
 
     val mContext = LocalContext.current
 
-    Button(colors = ButtonDefaults.buttonColors(
-        backgroundColor = Color(red = 0, green = 102, blue =255),contentColor = Color.White),
-        modifier = Modifier
-            .fillMaxSize(),
-        shape = RoundedCornerShape(30.dp),
-        elevation = ButtonDefaults.elevation(
-            defaultElevation = 10.dp,
-            pressedElevation = 15.dp,
-            disabledElevation = 0.dp
-        ),
-        onClick = { mContext.startActivity(Intent(mContext, Level_4_Activity::class.java)) }
-    ) {
-        Text(
-            text = "Level 4",
-            fontSize = 30.sp,
-            textAlign = TextAlign.Center
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        Image(
+            painter = painterResource(id = R.drawable.btn),
+            contentDescription = "Boton",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(40))
+                .border(2.dp, Color.Black, RoundedCornerShape(40))
+                .clickable(
+                    onClick = {
+                        mContext.startActivity(
+                            Intent(
+                                mContext,
+                                Level_4_Activity::class.java
+                            )
+                        )
+                    }
+                )
         )
+
+        val aux = 100f
+
+        val customTypeface = LocalContext.current.resources.getFont(R.font.marblefont)
+
+        val textPaintStroke = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.STROKE
+            textSize = aux
+            color = android.graphics.Color.BLACK
+            strokeWidth = 13f
+            strokeMiter= 10f
+            strokeJoin = android.graphics.Paint.Join.ROUND
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        val textPaint = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.FILL
+            textSize = aux
+            color = android.graphics.Color.WHITE
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        Canvas(
+            modifier = Modifier
+                .fillMaxSize(),
+            onDraw = {
+                drawIntoCanvas {
+                    it.nativeCanvas.drawText(
+                        "Level 4",
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaintStroke
+                    )
+                    it.nativeCanvas.drawText(
+                        "Level 4",
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaint
+                    )
+                }
+            }
+        )
+
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun BackButton(){
 
     val mContext = LocalContext.current
 
-    Button(
-        modifier = Modifier
-            .fillMaxSize(),
-        shape = RoundedCornerShape(30.dp),
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = Color.Gray
-        ),
-        elevation = ButtonDefaults.elevation(
-            defaultElevation = 10.dp,
-            pressedElevation = 15.dp,
-            disabledElevation = 0.dp
-        ),
-        onClick = { mContext.startActivity(Intent(mContext, ComposeMainMenu::class.java)) }
-    ) {
-        Text(
-            text = "Back",
-            color = Color.White,
-            fontSize = 30.sp,
-            textAlign = TextAlign.Center
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        Image(
+            painter = painterResource(id = R.drawable.btn2),
+            contentDescription = "Boton",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(40))
+                .border(2.dp, Color.Black, RoundedCornerShape(40))
+                .clickable(
+                    onClick = {
+                        mContext.startActivity(
+                            Intent(
+                                mContext,
+                                ComposeMainMenu::class.java
+                            )
+                        )
+                    }
+                )
         )
+
+        val aux = 100f
+
+        val customTypeface = LocalContext.current.resources.getFont(R.font.marblefont)
+
+        val textPaintStroke = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.STROKE
+            textSize = aux
+            color = android.graphics.Color.BLACK
+            strokeWidth = 13f
+            strokeMiter= 10f
+            strokeJoin = android.graphics.Paint.Join.ROUND
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        val textPaint = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.FILL
+            textSize = aux
+            color = android.graphics.Color.WHITE
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        Canvas(
+            modifier = Modifier
+                .fillMaxSize(),
+            onDraw = {
+                drawIntoCanvas {
+                    it.nativeCanvas.drawText(
+                        "Back",
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaintStroke
+                    )
+                    it.nativeCanvas.drawText(
+                        "Back",
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaint
+                    )
+                }
+            }
+        )
+
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun LevelSelectionContent(){
 
