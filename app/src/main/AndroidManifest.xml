@@ -15,6 +15,13 @@
         android:theme="@style/Theme.Material3.Dark.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".Level_Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ResumeLevel"
             android:exported="false">
             <meta-data

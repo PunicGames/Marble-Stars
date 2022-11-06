@@ -16,23 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 
 
-class Level_2_Activity : AppCompatActivity() {
-    lateinit var mSensorManager: SensorManager
-    lateinit var mGravitometer: Sensor
-    lateinit var mVibrator: Vibrator
-
-    var game: GameView? = null
-
-    private var sensorEventListener = object : SensorEventListener {
-        override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
-
-        @RequiresApi(Build.VERSION_CODES.O)
-        override fun onSensorChanged(event: SensorEvent) {
-
-            game?.onSensorChanged(event.values[0], event.values[1])
-
-        }
-    }
+class Level_2_Activity : Level_Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +44,7 @@ class Level_2_Activity : AppCompatActivity() {
             val intent = Intent(this, ComposeMainMenu::class.java)
             startActivity(intent)
             mSensorManager.unregisterListener(sensorEventListener)
+            game!!.DeactivateSounds()
             finish()
         }
 
@@ -149,6 +134,5 @@ class Level_2_Activity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        game!!.DeactivateSounds();
     }
 }
