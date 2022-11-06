@@ -2,6 +2,7 @@ package com.PunicGames.flappyphone
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -27,6 +28,9 @@ import java.time.format.TextStyle
 class ComposeMainMenu : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContent {
             MainMenuContent()
         }
@@ -58,10 +62,11 @@ fun PlayButton(){
 
     val mContext = LocalContext.current
 
-    Button(
+    Button( colors = ButtonDefaults.buttonColors(
+        backgroundColor = Color(red = 0, green = 102, blue =255),contentColor = Color.White),
         modifier = Modifier
             .fillMaxSize(),
-        shape = RoundedCornerShape(30.dp),
+        shape = RoundedCornerShape(60.dp),
         elevation = ButtonDefaults.elevation(
             defaultElevation = 10.dp,
             pressedElevation = 15.dp,

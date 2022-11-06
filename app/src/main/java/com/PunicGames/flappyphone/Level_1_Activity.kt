@@ -134,7 +134,11 @@ class Level_1_Activity : AppCompatActivity() {
 
 
     }
-
+    fun finishActivity()
+    {
+        mSensorManager.unregisterListener(sensorEventListener)
+        finish()
+    }
     override fun onDestroy() {
         super.onDestroy()
         game!!.DeactivateSounds();
