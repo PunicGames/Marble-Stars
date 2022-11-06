@@ -1,6 +1,7 @@
 package com.PunicGames.flappyphone
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
@@ -44,6 +45,8 @@ class ComposeResumeLevelActivity : ComponentActivity() {
     var star3Alpha = 0.2f
     var star4Alpha = 0.2f
 
+    private lateinit var backgroundMusic: MediaPlayer
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +72,12 @@ class ComposeResumeLevelActivity : ComponentActivity() {
 
             ResumeLevelViewContainer()
         }
+
+
+        backgroundMusic = MediaPlayer.create(this, R.raw.resume_song);
+        backgroundMusic.start()
+        backgroundMusic.isLooping = true;
+        backgroundMusic.setVolume(0.5f, 0.5f);
 
 
     }
@@ -143,7 +152,10 @@ class ComposeResumeLevelActivity : ComponentActivity() {
                                     mContext,
                                     ComposeLevelSelectionActivity::class.java
                                 )
-                            )
+                            );
+
+                            backgroundMusic.stop()
+                            backgroundMusic.release()
                         }
                     )
             )
