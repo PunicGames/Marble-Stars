@@ -27,6 +27,7 @@ class GameView @JvmOverloads constructor(
     private lateinit var backgroundMediaPlayer: MediaPlayer
     private lateinit var starMediaPlayer: MediaPlayer
     private lateinit var rollingBallPlayer: MediaPlayer
+    private lateinit var holeSound: MediaPlayer
 
 
 
@@ -62,6 +63,10 @@ class GameView @JvmOverloads constructor(
             rollingBallPlayer.start();
             rollingBallPlayer.isLooping = true;
             rollingBallPlayer.setVolume(0.0f, 0.0f);
+        }
+        if(!this::holeSound.isInitialized){
+            holeSound = MediaPlayer.create(context, R.raw.hole);
+            holeSound.setVolume(1.0f, 1.0f);
         }
         ballPaint.color = Color.rgb(220, 25, 75)
     }
@@ -244,7 +249,8 @@ class GameView @JvmOverloads constructor(
                     level?.starColliders!![i].tile.collected = false
                 }
 
-
+                holeSound.seekTo(0)
+                holeSound.start()
             }
 
             else -> {
@@ -327,6 +333,10 @@ class GameView @JvmOverloads constructor(
         if(this::backgroundMediaPlayer.isInitialized){
             backgroundMediaPlayer.stop()
             backgroundMediaPlayer.release()
+        }
+        if(this::holeSound.isInitialized){
+            holeSound.stop()
+            holeSound.release()
         }
     }
 
