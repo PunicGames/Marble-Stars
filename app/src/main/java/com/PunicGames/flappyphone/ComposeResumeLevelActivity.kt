@@ -2,6 +2,7 @@ package com.PunicGames.flappyphone
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -39,6 +40,10 @@ class ComposeResumeLevelActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContent {
 
@@ -108,7 +113,8 @@ class ComposeResumeLevelActivity : ComponentActivity() {
 
         val mContext = LocalContext.current
 
-        Button(
+        Button(colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color(red = 0, green = 102, blue =255),contentColor = Color.White),
             modifier = Modifier
                 .fillMaxSize(),
             shape = RoundedCornerShape(30.dp),
@@ -117,7 +123,8 @@ class ComposeResumeLevelActivity : ComponentActivity() {
                 pressedElevation = 15.dp,
                 disabledElevation = 0.dp
             ),
-            onClick = { mContext.startActivity(Intent(mContext, ComposeMainMenu::class.java)) }
+            onClick = { mContext.startActivity(Intent(mContext, ComposeMainMenu::class.java))
+            finish()}
         ) {
             Text(
                 text = "Exit",

@@ -63,7 +63,7 @@ class GameView @JvmOverloads constructor(
             rollingBallPlayer.isLooping = true;
             rollingBallPlayer.setVolume(0.0f, 0.0f);
         }
-        ballPaint.color = Color.RED
+        ballPaint.color = Color.rgb(220, 25, 75)
     }
 
 /*
@@ -212,6 +212,11 @@ class GameView @JvmOverloads constructor(
                 intent.putExtra("minutes", minutes)
                 intent.putExtra("seconds", seconds)
                 context.startActivity(intent);
+
+                //var gameContext: Level_1_Activity= context as Level_1_Activity
+                //gameContext.finishActivity()
+
+
             }
 
             Type.star -> {
