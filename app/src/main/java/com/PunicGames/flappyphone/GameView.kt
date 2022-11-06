@@ -213,8 +213,8 @@ class GameView @JvmOverloads constructor(
                 intent.putExtra("seconds", seconds)
                 context.startActivity(intent);
 
-                //var gameContext: Level_1_Activity= context as Level_1_Activity
-                //gameContext.finishActivity()
+                var gameContext: Level_Activity = context as Level_Activity
+                gameContext.finishActivity()
 
 
             }
