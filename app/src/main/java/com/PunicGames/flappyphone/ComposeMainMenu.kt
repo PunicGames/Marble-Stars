@@ -1,6 +1,7 @@
 package com.PunicGames.flappyphone
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
@@ -43,6 +44,9 @@ import java.time.format.TextStyle
 class ComposeMainMenu : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        lateinit var mainMusic: MediaPlayer
+
         super.onCreate(savedInstanceState)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -51,18 +55,200 @@ class ComposeMainMenu : ComponentActivity() {
         setContent {
             MainMenuContent()
         }
+
     }
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @Preview(showBackground = true, widthDp = 400, heightDp = 800)
+    @Composable
+    fun MainMenuViewContainer(){
+
+        Scaffold(
+            content = { MainMenuContent()}
+        )
+    }
+
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @Composable
+    fun PlayButton(){
+
+        val mContext = LocalContext.current
+
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ){
+            Image(
+                painter = painterResource(id = R.drawable.btn),
+                contentDescription = "Boton",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(40))
+                    .border(2.dp, Color.Black, RoundedCornerShape(40))
+                    .clickable(
+                        onClick = {
+                            mContext.startActivity(
+                                Intent(
+                                    mContext,
+                                    ComposeLevelSelectionActivity::class.java
+                                )
+                            )
+                        }
+                    )
+            )
+
+            val aux = 150f
+
+            val customTypeface = LocalContext.current.resources.getFont(R.font.marblefont)
+
+            val textPaintStroke = Paint().asFrameworkPaint().apply {
+                isAntiAlias = true
+                style = android.graphics.Paint.Style.STROKE
+                textSize = aux
+                color = android.graphics.Color.BLACK
+                strokeWidth = 13f
+                strokeMiter= 10f
+                strokeJoin = android.graphics.Paint.Join.ROUND
+                textAlign = android.graphics.Paint.Align.CENTER
+                typeface = customTypeface
+            }
+
+            val textPaint = Paint().asFrameworkPaint().apply {
+                isAntiAlias = true
+                style = android.graphics.Paint.Style.FILL
+                textSize = aux
+                color = android.graphics.Color.WHITE
+                textAlign = android.graphics.Paint.Align.CENTER
+                typeface = customTypeface
+            }
+
+            Canvas(
+                modifier = Modifier
+                    .fillMaxSize(),
+                onDraw = {
+                    drawIntoCanvas {
+                        it.nativeCanvas.drawText(
+                            "Play",
+                            size.width / 2,
+                            size.height / 2 + aux / 3,
+                            textPaintStroke
+                        )
+                        it.nativeCanvas.drawText(
+                            "Play",
+                            size.width / 2,
+                            size.height / 2 + aux / 3,
+                            textPaint
+                        )
+                    }
+                }
+            )
+
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @Composable
+    fun MainMenuContent(){
+
+        ImageBackground()
+
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
+                //.background(Color.Blue)
+            ) {
+
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(5f)
+                //.background(Color.Green)
+            ) {
+
+                //Hueco 1
+                Row(modifier = Modifier
+                    .fillMaxSize()
+                    .weight(3f)
+                    //.background(Color.Blue)
+                ){
+
+                }
+
+                //Imagen logo
+                Row(modifier = Modifier
+                    .fillMaxSize()
+                    .weight(5f)
+                    //.background(Color.Green)
+                ) {
+
+                    Image(
+                        painter = painterResource(id = R.drawable.menu_logo),
+                        contentDescription = "Logo",
+                        contentScale = ContentScale.FillWidth,
+                        modifier = Modifier.fillMaxSize()
+                    )
+
+                }
+
+                //Hueco 2
+                Row(modifier = Modifier
+                    .fillMaxSize()
+                    .weight(2f)
+                    //.background(Color.Blue)
+                ){
+
+                }
+
+                //Boton jugar
+                Row(modifier = Modifier
+                    .fillMaxSize()
+                    .weight(2f)
+                    //.background(Color.Green)
+                ){
+                    PlayButton()
+                }
+
+                //Hueco 3
+                Row(modifier = Modifier
+                    .fillMaxSize()
+                    .weight(3f)
+                    //.background(Color.Blue)
+                ){
+
+                }
+
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
+                //.background(Color.Blue)
+            ) {
+
+            }
+
+        }
+
+
+
+    }
+
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true, widthDp = 400, heightDp = 800)
-@Composable
-fun MainMenuViewContainer(){
 
-    Scaffold(
-        content = { MainMenuContent()}
-    )
-}
 
 @Composable
 fun ImageBackground(){
@@ -72,179 +258,4 @@ fun ImageBackground(){
         contentScale = ContentScale.FillBounds,
         modifier = Modifier.fillMaxSize()
     )
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun PlayButton(){
-
-    val mContext = LocalContext.current
-    
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ){
-        Image(
-            painter = painterResource(id = R.drawable.btn),
-            contentDescription = "Boton",
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier
-                .fillMaxSize()
-                .clip(RoundedCornerShape(40))
-                .border(2.dp, Color.Black, RoundedCornerShape(40))
-                .clickable(
-                    onClick = {
-                        mContext.startActivity(
-                            Intent(
-                                mContext,
-                                ComposeLevelSelectionActivity::class.java
-                            )
-                        )
-                    }
-                )
-        )
-
-        val aux = 150f
-
-        val customTypeface = LocalContext.current.resources.getFont(R.font.marblefont)
-
-        val textPaintStroke = Paint().asFrameworkPaint().apply {
-            isAntiAlias = true
-            style = android.graphics.Paint.Style.STROKE
-            textSize = aux
-            color = android.graphics.Color.BLACK
-            strokeWidth = 13f
-            strokeMiter= 10f
-            strokeJoin = android.graphics.Paint.Join.ROUND
-            textAlign = android.graphics.Paint.Align.CENTER
-            typeface = customTypeface
-        }
-
-        val textPaint = Paint().asFrameworkPaint().apply {
-            isAntiAlias = true
-            style = android.graphics.Paint.Style.FILL
-            textSize = aux
-            color = android.graphics.Color.WHITE
-            textAlign = android.graphics.Paint.Align.CENTER
-            typeface = customTypeface
-        }
-
-        Canvas(
-            modifier = Modifier
-                .fillMaxSize(),
-            onDraw = {
-                drawIntoCanvas {
-                    it.nativeCanvas.drawText(
-                        "Play",
-                        size.width / 2,
-                        size.height / 2 + aux / 3,
-                        textPaintStroke
-                    )
-                    it.nativeCanvas.drawText(
-                        "Play",
-                        size.width / 2,
-                        size.height / 2 + aux / 3,
-                        textPaint
-                    )
-                }
-            }
-        )
-
-    }
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun MainMenuContent(){
-
-    ImageBackground()
-
-    Row(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .weight(1f)
-                //.background(Color.Blue)
-        ) {
-
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .weight(5f)
-                //.background(Color.Green)
-        ) {
-
-            //Hueco 1
-            Row(modifier = Modifier
-                .fillMaxSize()
-                .weight(3f)
-                //.background(Color.Blue)
-            ){
-
-            }
-
-            //Imagen logo
-            Row(modifier = Modifier
-                .fillMaxSize()
-                .weight(5f)
-                //.background(Color.Green)
-            ) {
-
-                Image(
-                    painter = painterResource(id = R.drawable.menu_logo),
-                    contentDescription = "Logo",
-                    contentScale = ContentScale.FillWidth,
-                    modifier = Modifier.fillMaxSize()
-                )
-
-            }
-
-            //Hueco 2
-            Row(modifier = Modifier
-                .fillMaxSize()
-                .weight(2f)
-                //.background(Color.Blue)
-            ){
-
-            }
-
-            //Boton jugar
-            Row(modifier = Modifier
-                .fillMaxSize()
-                .weight(2f)
-                //.background(Color.Green)
-            ){
-                PlayButton()
-            }
-
-            //Hueco 3
-            Row(modifier = Modifier
-                .fillMaxSize()
-                .weight(3f)
-                //.background(Color.Blue)
-            ){
-
-            }
-
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .weight(1f)
-                //.background(Color.Blue)
-        ) {
-
-        }
-
-    }
-
-
-
 }
