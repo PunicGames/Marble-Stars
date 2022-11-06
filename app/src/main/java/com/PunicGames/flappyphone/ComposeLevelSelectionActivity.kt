@@ -33,6 +33,7 @@ class ComposeLevelSelectionActivity : ComponentActivity() {
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         setContent {
             LevelSelectionViewContainer()
         }

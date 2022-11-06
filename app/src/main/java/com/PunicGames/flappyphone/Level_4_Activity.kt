@@ -51,6 +51,8 @@ class Level_4_Activity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
         setContentView(R.layout.game_view_layout)
 
         game = findViewById(R.id.gv)

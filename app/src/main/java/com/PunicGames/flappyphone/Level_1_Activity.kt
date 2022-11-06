@@ -38,6 +38,8 @@ class Level_1_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mVibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         mGravitometer = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
         if (mGravitometer != null)
