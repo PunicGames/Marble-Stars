@@ -70,6 +70,7 @@ class Level_4_Activity : Level_Activity() {
                 )
 
                 game!!.level = level4
+                game!!.vibrator = mVibrator
 
 
 
