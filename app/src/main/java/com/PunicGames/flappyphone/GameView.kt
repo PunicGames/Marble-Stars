@@ -30,7 +30,6 @@ class GameView @JvmOverloads constructor(
     private lateinit var holeSound: MediaPlayer
 
 
-
     //Ball
     var ballPaint: Paint = Paint()
     var ball: Ball = Ball(0f, 0f, 25f, ballPaint)
@@ -40,6 +39,7 @@ class GameView @JvmOverloads constructor(
 
     //Points
     var points: Int = 0
+
     @RequiresApi(Build.VERSION_CODES.O)
     val initTime = LocalDateTime.now()
 
@@ -58,13 +58,13 @@ class GameView @JvmOverloads constructor(
             backgroundMediaPlayer.isLooping = true;
             backgroundMediaPlayer.setVolume(0.2f, 0.2f);
         }
-        if(!this::rollingBallPlayer.isInitialized){
+        if (!this::rollingBallPlayer.isInitialized) {
             rollingBallPlayer = MediaPlayer.create(context, R.raw.rolling);
             rollingBallPlayer.start();
             rollingBallPlayer.isLooping = true;
             rollingBallPlayer.setVolume(0.0f, 0.0f);
         }
-        if(!this::holeSound.isInitialized){
+        if (!this::holeSound.isInitialized) {
             holeSound = MediaPlayer.create(context, R.raw.hole);
             holeSound.setVolume(1.0f, 1.0f);
         }
@@ -103,10 +103,10 @@ class GameView @JvmOverloads constructor(
         // Change sound
         var factorX = ball.speed.x
         var factorY = ball.speed.y
-        if(factorX < 0){
+        if (factorX < 0) {
             factorX *= -1;
         }
-        if(factorY < 0){
+        if (factorY < 0) {
             factorY *= -1;
         }
         var factor = (factorX + factorY) / 2
@@ -117,71 +117,28 @@ class GameView @JvmOverloads constructor(
         checkCollisions()
 
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
-    fun resolveCollision(ball: Ball, box: BoxCollider, x: Float, y:Float){
+    fun resolveCollision(ball: Ball, box: BoxCollider, x: Float, y: Float) {
 
         when (box.type) {
             Type.wall -> {
+                if ((ball.posY >= box.center_y - box.height * 0.5f) && (ball.posY <= (box.center_y + box.height * 0.5f)))
+                    ball.speed.x *= -1
+                else if ((ball.posX >= box.center_x - box.width * 0.5f) && (ball.posX <= (box.center_x + box.width * 0.5f)))
+                    ball.speed.y *= -1
+                else {
+                    ball.speed.x *= -1
+                    ball.speed.y *= -1
+                }
+
 /*
-                // Version Javi R.
-                var bottomOfBall = ball.posY + (ball.radio)
-                var topOfBall = ball.posY - (ball.radio)
-                var leftSideOfBall = ball.posX - (ball.radio)
-                var rightSideOfBall = ball.posX + (ball.radio)
-
-                var topOfObject = box.ymin
-                var leftSideOfObject = box.xmin
-                var rightSideOfObject = box.ymin
-                var bottomOfObject = box.ymax
-
-                if ((ball.speed.x >= 0 &&
-                            ball.speed.y < 0 &&
-                            bottomOfObject - topOfBall < rightSideOfBall - leftSideOfObject) ||
-                    (ball.speed.x <= 0 &&
-                            ball.speed.y < 0 &&
-                            bottomOfObject - topOfBall < rightSideOfObject - leftSideOfBall) ||
-                    (ball.speed.x >= 0 &&
-                            ball.speed.y > 0 &&
-                            bottomOfBall - topOfObject < rightSideOfBall - leftSideOfObject) ||
-                    (ball.speed.x <= 0 &&
-                            ball.speed.y > 0 &&
-                            bottomOfBall - topOfObject < rightSideOfObject - leftSideOfBall)
-                ) {
-                    if (ball.speed.y > 0)
-                        ball.posY -= ball.radio
-                    else
-                        ball.posY += ball.radio
-                    ball.speed.y *= -0.9f
-
-                }
-                if ((ball.speed.y >= 0 &&
-                            ball.speed.x <= 0 &&
-                            bottomOfObject - topOfBall > rightSideOfBall - leftSideOfObject) ||
-                    (ball.speed.y < 0 &&
-                            ball.speed.x <= 0 &&
-                            bottomOfObject - topOfBall > rightSideOfObject - leftSideOfBall) ||
-                    (ball.speed.y > 0 &&
-                            ball.speed.x >= 0 &&
-                            bottomOfBall - topOfObject > rightSideOfBall - leftSideOfObject) ||
-                    (ball.speed.y < 0 &&
-                            ball.speed.x >= 0 &&
-                            bottomOfBall - topOfObject > rightSideOfObject - leftSideOfBall)
-                ) {
-                    if (ball.speed.x > 0)
-                        ball.posX -= ball.radio
-                    else
-                        ball.posX += ball.radio
-                    ball.speed.x *= -0.9f
-                }
-
-
- */
-
                 // Version JAVI S.
 
                 if((ball.posX > box.center_x) && (ball.posY >= box.center_y - box.height) && (ball.posY <= (box.center_y + box.height)))// Bola chocando por la derecha de la caja
                 {
                     ball.speed.x= -ball.speed.x
+
                 }
 
                 if((ball.posX < box.center_x) && (ball.posY >= box.center_y - box.height) && (ball.posY <= (box.center_y + box.height)))// Bola chocando por la izquierda de la caja
@@ -200,6 +157,8 @@ class GameView @JvmOverloads constructor(
                 }
 
 
+
+ */
 
 
             }
@@ -226,7 +185,7 @@ class GameView @JvmOverloads constructor(
             }
 
             Type.star -> {
-                if(!box.tile.collected){
+                if (!box.tile.collected) {
                     // Sonido
                     if (starMediaPlayer.isPlaying) {
                         starMediaPlayer.seekTo(0)
@@ -234,7 +193,7 @@ class GameView @JvmOverloads constructor(
                     starMediaPlayer.start();
 
                     //Obtener puntos
-                    points += 1 ;
+                    points += 1;
                     box.tile.collected = true;
                     //box.tile.posX = -100f;
 
@@ -246,7 +205,7 @@ class GameView @JvmOverloads constructor(
                 ball.posX = 120f;
                 ball.posY = 120f;
                 points = 0
-                for (i in 0..level?.starColliders!!.size - 1){
+                for (i in 0..level?.starColliders!!.size - 1) {
                     level?.starColliders!![i].tile.collected = false
                 }
 
@@ -286,10 +245,11 @@ class GameView @JvmOverloads constructor(
 
          */
     }
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun checkCollisions(){
 
-        if(level!=null) { //If level is not already created
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun checkCollisions() {
+
+        if (level != null) { //If level is not already created
 
             for (i in 0..level?.colliders!!.size - 1) {
 
@@ -318,24 +278,24 @@ class GameView @JvmOverloads constructor(
         vibrator?.vibrate(vibration)
     }
 
-    fun DeactivateSounds(){
-        if(this::collisionMediaPlayer.isInitialized){
+    fun DeactivateSounds() {
+        if (this::collisionMediaPlayer.isInitialized) {
             collisionMediaPlayer.stop()
             collisionMediaPlayer.release()
         }
-        if(this::starMediaPlayer.isInitialized){
+        if (this::starMediaPlayer.isInitialized) {
             starMediaPlayer.stop()
             starMediaPlayer.release()
         }
-        if(this::rollingBallPlayer.isInitialized){
+        if (this::rollingBallPlayer.isInitialized) {
             rollingBallPlayer.stop()
             rollingBallPlayer.release()
         }
-        if(this::backgroundMediaPlayer.isInitialized){
+        if (this::backgroundMediaPlayer.isInitialized) {
             backgroundMediaPlayer.stop()
             backgroundMediaPlayer.release()
         }
-        if(this::holeSound.isInitialized){
+        if (this::holeSound.isInitialized) {
             holeSound.stop()
             holeSound.release()
         }

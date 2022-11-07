@@ -151,7 +151,7 @@ class Level_4_Activity : Level_Activity() {
                 //////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////////////////////////////////////////////
 
-                level4.setBallStartPosAndSize(200f,200f)
+                level4.setBallStartPosAndSize(80f,80f)
 
             }
         })

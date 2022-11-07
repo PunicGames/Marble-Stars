@@ -70,7 +70,7 @@ class Level_1_Activity : Level_Activity() {
 
                 game!!.level = level1
                 game!!.vibrator = mVibrator
-                //level1.debug=true
+                level1.debug=true
 
                 //DISEÑA  TU NIVEL AQUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 // Meta
@@ -79,17 +79,17 @@ class Level_1_Activity : Level_Activity() {
                 // Limites
                 level1.setTWallBlock(0, 0, 1, 32)
                 level1.setTWallBlock(17, 0, 18, 32)
-                level1.setTWallBlock(0, 0, 18, 1)
-                level1.setTWallBlock(0, 31, 18, 32)
+                level1.setTWallBlock(1, 0, 17, 1)
+                level1.setTWallBlock(1, 31, 17, 32)
 
                 // Paredes Horizontales
                 level1.setTWallBlock(1, 4, 3, 5)
                 level1.setTWallBlock(3, 8, 5, 9)
                 level1.setTWallBlock(1, 12, 8, 13)
-                level1.setTWallBlock(1, 16, 5, 17)
+                level1.setTWallBlock(1, 16, 4, 17)
                 level1.setTWallBlock(3, 28, 13, 29)
-                level1.setTWallBlock(11, 11, 14, 12)
-                level1.setTWallBlock(8, 17, 12, 18)
+                level1.setTWallBlock(12, 11, 14, 12)
+                level1.setTWallBlock(9, 17, 12, 18)
                 level1.setTWallBlock(11, 21, 14, 22)
 
                 // Paredes Verticales
