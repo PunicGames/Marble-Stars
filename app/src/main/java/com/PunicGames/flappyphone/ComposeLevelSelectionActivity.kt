@@ -34,6 +34,7 @@ import com.google.android.material.internal.ViewUtils.dpToPx
 class ComposeLevelSelectionActivity : ComponentActivity() {
 
     private lateinit var selectorMusic: MediaPlayer
+    private lateinit var buttonEffect: MediaPlayer
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +53,9 @@ class ComposeLevelSelectionActivity : ComponentActivity() {
         selectorMusic.start()
         selectorMusic.isLooping = true;
         selectorMusic.setVolume(0.2f, 0.2f);
+
+        buttonEffect = MediaPlayer.create(this, R.raw.button);
+        buttonEffect.setVolume(0.6f, 0.6f)
     }
 
 
@@ -93,6 +97,9 @@ class ComposeLevelSelectionActivity : ComponentActivity() {
                             );
                             selectorMusic.stop()
                             selectorMusic.release()
+
+                            buttonEffect.seekTo(0)
+                            buttonEffect.start()
                         }
                     )
             )
@@ -174,6 +181,9 @@ class ComposeLevelSelectionActivity : ComponentActivity() {
                             );
                             selectorMusic.stop()
                             selectorMusic.release()
+
+                            buttonEffect.seekTo(0)
+                            buttonEffect.start()
                         }
                     )
             )
@@ -255,6 +265,9 @@ class ComposeLevelSelectionActivity : ComponentActivity() {
                             );
                             selectorMusic.stop()
                             selectorMusic.release()
+
+                            buttonEffect.seekTo(0)
+                            buttonEffect.start()
                         }
                     )
             )
@@ -337,6 +350,8 @@ class ComposeLevelSelectionActivity : ComponentActivity() {
                             selectorMusic.stop()
                             selectorMusic.release()
 
+                            buttonEffect.seekTo(0)
+                            buttonEffect.start()
                         }
                     )
             )
@@ -418,6 +433,9 @@ class ComposeLevelSelectionActivity : ComponentActivity() {
                             );
                             selectorMusic.stop()
                             selectorMusic.release()
+
+                            buttonEffect.seekTo(0)
+                            buttonEffect.start()
                         }
                     )
             )
