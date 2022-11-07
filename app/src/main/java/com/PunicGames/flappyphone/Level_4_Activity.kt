@@ -89,8 +89,8 @@ class Level_4_Activity : Level_Activity() {
                 // Limites
                 level4.setTWallBlock(0, 0, 1, 32)
                 level4.setTWallBlock(17, 0, 18, 32)
-                level4.setTWallBlock(0, 0, 18, 1)
-                level4.setTWallBlock(0, 31, 18, 32)
+                level4.setTWallBlock(1, 0, 17, 1)
+                level4.setTWallBlock(1, 31, 17, 32)
 
 
                 // Paredes Horizontales
