@@ -11,7 +11,6 @@ class Ball(_posX: Float, _posY: Float, _radio: Float, _paint: Paint) {
     var radio: Float = _radio
     var paint: Paint = _paint
     var speed: Vector2D = Vector2D(0.0F, 0.0F)
-    //var life: Int = 10
 
 
     fun draw(canvas: Canvas?) {
