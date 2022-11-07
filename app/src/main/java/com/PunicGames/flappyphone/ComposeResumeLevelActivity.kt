@@ -424,7 +424,7 @@ class ComposeResumeLevelActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .weight(1f)
+                            .weight(2f)
                     ) {
                         TimeText()
                     }
