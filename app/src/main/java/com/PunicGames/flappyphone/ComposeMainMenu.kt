@@ -42,10 +42,12 @@ import com.PunicGames.flappyphone.ui.theme.marble
 import java.time.format.TextStyle
 
 class ComposeMainMenu : ComponentActivity() {
+
+    private lateinit var mainMusic: MediaPlayer
+    private lateinit var buttonEffect: MediaPlayer
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        lateinit var mainMusic: MediaPlayer
 
         super.onCreate(savedInstanceState)
         window.setFlags(
@@ -56,6 +58,14 @@ class ComposeMainMenu : ComponentActivity() {
             MainMenuContent()
         }
 
+        // Music
+        mainMusic = MediaPlayer.create(this, R.raw.main_song);
+        mainMusic.start()
+        mainMusic.isLooping = true;
+        mainMusic.setVolume(0.2f, 0.2f);
+
+        buttonEffect = MediaPlayer.create(this, R.raw.button);
+        buttonEffect.setVolume(0.6f, 0.6f)
     }
 
 
@@ -96,7 +106,12 @@ class ComposeMainMenu : ComponentActivity() {
                                     mContext,
                                     ComposeLevelSelectionActivity::class.java
                                 )
-                            )
+                            );
+                            mainMusic.stop()
+                            mainMusic.release()
+
+                            buttonEffect.seekTo(0)
+                            buttonEffect.start()
                         }
                     )
             )

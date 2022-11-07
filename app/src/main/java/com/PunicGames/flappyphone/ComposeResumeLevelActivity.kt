@@ -46,6 +46,7 @@ class ComposeResumeLevelActivity : ComponentActivity() {
     var star4Alpha = 0.2f
 
     private lateinit var backgroundMusic: MediaPlayer
+    private lateinit var buttonEffect: MediaPlayer
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +80,8 @@ class ComposeResumeLevelActivity : ComponentActivity() {
         backgroundMusic.isLooping = true;
         backgroundMusic.setVolume(0.5f, 0.5f);
 
-
+        buttonEffect = MediaPlayer.create(this, R.raw.button);
+        buttonEffect.setVolume(0.6f, 0.6f)
     }
 
     fun Star1(){
@@ -156,6 +158,9 @@ class ComposeResumeLevelActivity : ComponentActivity() {
 
                             backgroundMusic.stop()
                             backgroundMusic.release()
+
+                            buttonEffect.seekTo(0)
+                            buttonEffect.start()
                         }
                     )
             )
