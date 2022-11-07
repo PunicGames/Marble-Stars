@@ -61,6 +61,16 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ComposeTutorialActivity"
+            android:exported="false"
+            android:label="ComposeTutorialActivity"
+            android:theme="@style/Theme.FlappyPhone"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ComposeResumeLevelActivity"
             android:exported="false"
             android:label="ComposeResumeLevelActivity"

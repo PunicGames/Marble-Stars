@@ -167,6 +167,90 @@ class ComposeMainMenu : ComponentActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     @Composable
+    fun TutorialButton(){
+
+        val mContext = LocalContext.current
+
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ){
+            Image(
+                painter = painterResource(id = R.drawable.btn),
+                contentDescription = "Boton",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(40))
+                    .border(2.dp, Color.Black, RoundedCornerShape(40))
+                    .clickable(
+                        onClick = {
+                            mContext.startActivity(
+                                Intent(
+                                    mContext,
+                                    ComposeTutorialActivity::class.java
+                                )
+                            );
+                            mainMusic.stop()
+                            mainMusic.release()
+
+                            buttonEffect.seekTo(0)
+                            buttonEffect.start()
+                        }
+                    )
+            )
+
+            val aux = 100f
+
+            val customTypeface = LocalContext.current.resources.getFont(R.font.marblefont)
+
+            val textPaintStroke = Paint().asFrameworkPaint().apply {
+                isAntiAlias = true
+                style = android.graphics.Paint.Style.STROKE
+                textSize = aux
+                color = android.graphics.Color.BLACK
+                strokeWidth = 13f
+                strokeMiter= 10f
+                strokeJoin = android.graphics.Paint.Join.ROUND
+                textAlign = android.graphics.Paint.Align.CENTER
+                typeface = customTypeface
+            }
+
+            val textPaint = Paint().asFrameworkPaint().apply {
+                isAntiAlias = true
+                style = android.graphics.Paint.Style.FILL
+                textSize = aux
+                color = android.graphics.Color.WHITE
+                textAlign = android.graphics.Paint.Align.CENTER
+                typeface = customTypeface
+            }
+
+            Canvas(
+                modifier = Modifier
+                    .fillMaxSize(),
+                onDraw = {
+                    drawIntoCanvas {
+                        it.nativeCanvas.drawText(
+                            "Tutorial",
+                            size.width / 2,
+                            size.height / 2 + aux / 3,
+                            textPaintStroke
+                        )
+                        it.nativeCanvas.drawText(
+                            "Tutorial",
+                            size.width / 2,
+                            size.height / 2 + aux / 3,
+                            textPaint
+                        )
+                    }
+                }
+            )
+
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @Composable
     fun MainMenuContent(){
 
         ImageBackground()
@@ -180,7 +264,7 @@ class ComposeMainMenu : ComponentActivity() {
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f)
-                //.background(Color.Blue)
+                    //.background(Color.Blue)
             ) {
 
             }
@@ -189,7 +273,7 @@ class ComposeMainMenu : ComponentActivity() {
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(5f)
-                //.background(Color.Green)
+                    //.background(Color.Green)
             ) {
 
                 //Hueco 1
@@ -211,7 +295,7 @@ class ComposeMainMenu : ComponentActivity() {
                     Image(
                         painter = painterResource(id = R.drawable.menu_logo),
                         contentDescription = "Logo",
-                        contentScale = ContentScale.FillWidth,
+                        contentScale = ContentScale.Fit,
                         modifier = Modifier.fillMaxSize()
                     )
 
@@ -220,7 +304,7 @@ class ComposeMainMenu : ComponentActivity() {
                 //Hueco 2
                 Row(modifier = Modifier
                     .fillMaxSize()
-                    .weight(2f)
+                    .weight(3f)
                     //.background(Color.Blue)
                 ){
 
@@ -238,7 +322,29 @@ class ComposeMainMenu : ComponentActivity() {
                 //Hueco 3
                 Row(modifier = Modifier
                     .fillMaxSize()
-                    .weight(3f)
+                    .weight(1f)
+                    //.background(Color.Blue)
+                ){
+
+                }
+
+                //Boton tutorial
+                Row(modifier = Modifier
+                    .fillMaxSize()
+                    .weight(2f)
+                    //.background(Color.Green)
+                ){
+                    Box(modifier = Modifier.padding(vertical = 10.dp, horizontal = 20.dp)){
+                        TutorialButton()
+                    }
+
+
+                }
+
+                //Hueco 4
+                Row(modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
                     //.background(Color.Blue)
                 ){
 
@@ -250,7 +356,7 @@ class ComposeMainMenu : ComponentActivity() {
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f)
-                //.background(Color.Blue)
+                    //.background(Color.Blue)
             ) {
 
             }
