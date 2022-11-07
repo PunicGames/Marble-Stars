@@ -179,10 +179,6 @@ class Level(
     }
 
     fun draw(canvas: Canvas?) {
-
-        //canvas?.drawBitmap(walkable, 0f, 0f, null)
-        //canvas?.drawColor(Color.WHITE)
-
         canvas?.drawBitmap(backGround, 0.0f, 0.0f, null)
 
         for (i in 0..cells.size - 1) {
