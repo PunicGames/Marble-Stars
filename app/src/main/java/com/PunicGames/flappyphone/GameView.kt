@@ -123,15 +123,28 @@ class GameView @JvmOverloads constructor(
 
         when (box.type) {
             Type.wall -> {
-                if ((ball.posY >= box.center_y - box.height * 0.5f) && (ball.posY <= (box.center_y + box.height * 0.5f)))
-                    ball.speed.x *= -1
-                else if ((ball.posX >= box.center_x - box.width * 0.5f) && (ball.posX <= (box.center_x + box.width * 0.5f)))
+
+                if ((ball.posY >= box.center_y - box.height * 0.5f) && (ball.posY <= (box.center_y + box.height * 0.5f))){
+                    if (ball.speed.x < 0)
+                        ball.posX += ball.colliderRadio*0.2F else ball.posX -= ball.colliderRadio*0.2F
+                ball.speed.x *= -1
+                }
+                else if ((ball.posX >= box.center_x - box.width * 0.5f) && (ball.posX <= (box.center_x + box.width * 0.5f))) {
+                    if (ball.speed.y < 0)
+                        ball.posY += ball.colliderRadio*0.2F else ball.posY -= ball.colliderRadio*0.2F
                     ball.speed.y *= -1
-                else {
+                }else {
                     ball.speed.x *= -1
                     ball.speed.y *= -1
                 }
 
+
+/*
+                if (box.checkIntersection(ball.posX,ball.posY,ball.posX-ball.colliderRadio,ball.posY,box.xmax,box.ymax,box.xmax,box.ymin) && box.checkIntersection(ball.posX+ball.colliderRadio,ball.posY,ball.posX,ball.posY,box.xmin,box.ymax,box.xmin,box.ymin))
+                    ball.speed.x *= -1
+                if(box.checkIntersection(ball.posX,ball.posY,ball.posX,ball.posY-ball.colliderRadio,box.xmax,box.ymax,box.xmin,box.ymax) && box.checkIntersection(ball.posX,ball.posY+ball.colliderRadio,ball.posX,ball.posY,box.xmax,box.ymin,box.xmin,box.ymin))
+                    ball.speed.y *= -1
+*/
 
 
 /*

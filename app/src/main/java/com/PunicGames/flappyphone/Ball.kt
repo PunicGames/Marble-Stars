@@ -9,7 +9,7 @@ class Ball(_posX: Float, _posY: Float, _radio: Float, _paint: Paint) {
     var posX: Float = _posX
     var posY: Float = _posY
     var radio: Float = _radio
-    var colliderRadio: Float = _radio*0.8f
+    var colliderRadio: Float = _radio*0.7f
     var paint: Paint = _paint
     var speed: Vector2D = Vector2D(0.0F, 0.0F)
 
