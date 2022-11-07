@@ -401,7 +401,7 @@ class ComposeLevelSelectionActivity : ComponentActivity() {
             contentAlignment = Alignment.Center
         ){
             Image(
-                painter = painterResource(id = R.drawable.btn2),
+                painter = painterResource(id = R.drawable.btn),
                 contentDescription = "Boton",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier

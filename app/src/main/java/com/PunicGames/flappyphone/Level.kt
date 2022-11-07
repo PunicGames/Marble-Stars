@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
 
 //Porque? Pa no repetir esto en cada game view
 class Level(
@@ -18,6 +19,8 @@ class Level(
 ) {
 
     var v: GameView = view
+
+    var debug: Boolean = false
 
     val col: Int = 18
     val row: Int = 32
@@ -161,12 +164,13 @@ class Level(
         cells.add(holeTile)
 
         //Collider
+        var treshold : Float = cellSize*0.15f
         var collider = BoxCollider(
             Type.hole,
-            _col * cellSize,
-            _col * cellSize + cellSize,
-            _row * cellSize,
-            _row * cellSize + cellSize
+            _col * cellSize+treshold,
+            _col * cellSize + cellSize-treshold,
+            _row * cellSize+treshold,
+            _row * cellSize + cellSize-treshold
         )
 
         colliders.add(collider)
@@ -185,6 +189,18 @@ class Level(
             if (!cells[i].collected)
                 canvas?.drawBitmap(cells[i].bitmap, cells[i].posX, cells[i].posY, null)
         }
+
+        if(debug == true){
+            var debugPaint : Paint = Paint()
+            debugPaint.color =Color.GREEN
+            debugPaint.alpha = 125
+            for (i in 0..colliders.size - 1) {
+                    canvas?.drawRect(colliders[i].xmin,colliders[i].ymax,colliders[i].xmax,colliders[i].ymin,debugPaint)
+            }
+
+        }
+
+
     }
 
 }
