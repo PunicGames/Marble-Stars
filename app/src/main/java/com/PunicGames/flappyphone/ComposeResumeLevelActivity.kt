@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
@@ -116,14 +117,56 @@ class ComposeResumeLevelActivity : ComponentActivity() {
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @Composable
     fun TimeText(){
-        Text(
-            modifier = Modifier.fillMaxSize(),
-            //text = "1:54", //placeholder
-            text = minutos.toString() + " : " + segundos.toString(),
-            fontSize = 40.sp,
-            textAlign = TextAlign.Center
+
+        val aux = 150f
+
+        val customTypeface = LocalContext.current.resources.getFont(R.font.marblefont)
+
+        val textPaintStroke = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.STROKE
+            textSize = aux
+            color = android.graphics.Color.BLACK
+            strokeWidth = 13f
+            strokeMiter= 10f
+            strokeJoin = android.graphics.Paint.Join.ROUND
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        val textPaint = Paint().asFrameworkPaint().apply {
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.FILL
+            textSize = aux
+            color = android.graphics.Color.WHITE
+            textAlign = android.graphics.Paint.Align.CENTER
+            typeface = customTypeface
+        }
+
+        var time = minutos.toString() + " : " + segundos.toString()
+
+        Canvas(
+            modifier = Modifier
+                .fillMaxSize(),
+            onDraw = {
+                drawIntoCanvas {
+                    it.nativeCanvas.drawText(
+                        time,
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaintStroke
+                    )
+                    it.nativeCanvas.drawText(
+                        time,
+                        size.width / 2,
+                        size.height / 2 + aux / 3,
+                        textPaint
+                    )
+                }
+            }
         )
     }
 
@@ -366,7 +409,27 @@ class ComposeResumeLevelActivity : ComponentActivity() {
                     .weight(1f)
                     //.background(Color.Green)
                 ){
-                    TimeText()
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .weight(1f)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.time),
+                            contentDescription = "Time",
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier.fillMaxSize(),
+                        )
+                    }
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .weight(1f)
+                    ) {
+                        TimeText()
+                    }
+
+
 
                 }
 
