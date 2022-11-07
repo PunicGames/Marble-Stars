@@ -122,7 +122,7 @@ class GameView @JvmOverloads constructor(
 
         when (box.type) {
             Type.wall -> {
-
+/*
                 // Version Javi R.
                 var bottomOfBall = ball.posY + (ball.radio)
                 var topOfBall = ball.posY - (ball.radio)
@@ -154,17 +154,17 @@ class GameView @JvmOverloads constructor(
                     ball.speed.y *= -0.9f
 
                 }
-                if ((ball.speed.x > 0 &&
-                            ball.speed.y <= 0 &&
+                if ((ball.speed.y >= 0 &&
+                            ball.speed.x <= 0 &&
                             bottomOfObject - topOfBall > rightSideOfBall - leftSideOfObject) ||
-                    (ball.speed.x < 0 &&
-                            ball.speed.y <= 0 &&
+                    (ball.speed.y < 0 &&
+                            ball.speed.x <= 0 &&
                             bottomOfObject - topOfBall > rightSideOfObject - leftSideOfBall) ||
-                    (ball.speed.x > 0 &&
-                            ball.speed.y >= 0 &&
+                    (ball.speed.y > 0 &&
+                            ball.speed.x >= 0 &&
                             bottomOfBall - topOfObject > rightSideOfBall - leftSideOfObject) ||
-                    (ball.speed.x < 0 &&
-                            ball.speed.y >= 0 &&
+                    (ball.speed.y < 0 &&
+                            ball.speed.x >= 0 &&
                             bottomOfBall - topOfObject > rightSideOfObject - leftSideOfBall)
                 ) {
                     if (ball.speed.x > 0)
@@ -174,33 +174,34 @@ class GameView @JvmOverloads constructor(
                     ball.speed.x *= -0.9f
                 }
 
+
+ */
+
                 // Version JAVI S.
-                /*
-                var boxWidth = box.xmax - box.xmin;
-                var boxHeight = box.ymax - box.ymin;
-                var boxXCenter = box.xmin + boxWidth*0.5f;
-                var boxYCenter = box.ymin + boxHeight*0.5f;
 
-                if((ball.posX >= boxXCenter) && (ball.posY > boxYCenter - boxHeight) && (ball.posY < (boxYCenter + boxHeight)))// Bola chocando por la derecha de la caja
+                if((ball.posX > box.center_x) && (ball.posY >= box.center_y - box.height) && (ball.posY <= (box.center_y + box.height)))// Bola chocando por la derecha de la caja
                 {
                     ball.speed.x= -ball.speed.x
                 }
 
-                if((ball.posX < boxXCenter) && (ball.posY > boxYCenter - boxHeight) && (ball.posY < (boxYCenter + boxHeight)))// Bola chocando por la izquierda de la caja
+                if((ball.posX < box.center_x) && (ball.posY >= box.center_y - box.height) && (ball.posY <= (box.center_y + box.height)))// Bola chocando por la izquierda de la caja
                 {
                     ball.speed.x= -ball.speed.x
                 }
 
-                if((ball.posY > boxYCenter) && (ball.posX > boxXCenter - boxWidth) && (ball.posX < boxXCenter + boxWidth))// Bola chocando por abajo de la caja
+                if((ball.posY > box.center_y ) && (ball.posX >= box.center_x - box.width) && (ball.posX <= box.center_x + box.width))// Bola chocando por abajo de la caja
                 {
                     ball.speed.y= -ball.speed.y
                 }
 
-                if((ball.posY < boxYCenter) && (ball.posX > boxXCenter - boxWidth) && (ball.posX < boxXCenter + boxWidth))
+                if((ball.posY < box.center_y ) && (ball.posX >= box.center_x - box.width) && (ball.posX <= box.center_x + box.width))
                 {
                     ball.speed.y=-ball.speed.y
                 }
-                */
+
+
+
+
             }
 
             Type.goal -> {

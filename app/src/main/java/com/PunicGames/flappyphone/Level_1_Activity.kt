@@ -78,6 +78,7 @@ class Level_1_Activity : Level_Activity() {
 
                 game!!.level = level1
                 game!!.vibrator = mVibrator
+                //level1.debug=true
 
                 //DISEÑA  TU NIVEL AQUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 // Meta

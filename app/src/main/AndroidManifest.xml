@@ -12,7 +12,7 @@
         android:label="Marble Stars"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Material3.Dark.NoActionBar"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
         <activity
             android:name=".Level_Activity"
@@ -49,16 +49,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".LeaderboardActivity"
-            android:exported="false"
-            android:label="@string/title_activity_leaderboard"
-            android:theme="@style/Theme.FlappyPhone"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".ComposeLevelSelectionActivity"
             android:exported="false"
