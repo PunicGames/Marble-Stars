@@ -6,6 +6,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class Level_1_Activity : Level_Activity() {
 
+    private lateinit var buttonEffect: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +44,14 @@ class Level_1_Activity : Level_Activity() {
 
         game = findViewById(R.id.gv)
 
+        buttonEffect = MediaPlayer.create(this, R.raw.button);
+        buttonEffect.setVolume(0.6f, 0.6f)
+
         var back: Button = findViewById(R.id.back_button)
         back.setOnClickListener {
+            buttonEffect.seekTo(0)
+            buttonEffect.start()
+
             val intent = Intent(this, ComposeMainMenu::class.java)
             startActivity(intent)
             mSensorManager.unregisterListener(sensorEventListener)
