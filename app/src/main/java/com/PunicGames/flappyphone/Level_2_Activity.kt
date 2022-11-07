@@ -74,30 +74,30 @@ class Level_2_Activity : Level_Activity() {
                 //DISEÑA  TU NIVEL AQUI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 // Meta
                 level2.setGoal(9, 1)
+                //level2.debug = true
 
                 // Limites
                 level2.setTWallBlock(0, 0, 1, 32)
                 level2.setTWallBlock(17, 0, 18, 32)
-                level2.setTWallBlock(0, 0, 18, 1)
-                level2.setTWallBlock(0, 31, 18, 32)
+                level2.setTWallBlock(1, 0, 17, 1)
+                level2.setTWallBlock(1, 31, 17, 32)
 
                 // Paredes Horizontales
                 level2.setTWallBlock(1, 4, 15, 5)
-                level2.setTWallBlock(1, 8, 15, 9)
-                level2.setTWallBlock(1, 8, 15, 9)
                 level2.setTWallBlock(1, 8, 15, 9)
                 level2.setTWallBlock(5, 12, 7, 13)
                 level2.setTWallBlock(1, 11, 2, 12)
                 level2.setTWallBlock(12, 11, 17, 12)
                 level2.setTWallBlock(3, 20, 9, 21)
                 level2.setTWallBlock(1, 27, 10, 28)
+                level2.setTWallBlock(7, 15, 9, 16)
+                level2.setTWallBlock(10, 15, 15, 16)
 
 
                 // Paredes Verticales
                 level2.setTWallBlock(4, 3, 5, 4)
                 level2.setTWallBlock(4, 9, 5, 18)
                 level2.setTWallBlock(13, 3, 14, 4)
-                level2.setTWallBlock(7, 15, 15, 16)
                 level2.setTWallBlock(9, 9, 10, 24)
                 level2.setTWallBlock(3, 17, 4, 18)
                 level2.setTWallBlock(3, 21, 4, 24)

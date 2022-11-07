@@ -132,6 +132,8 @@ class GameView @JvmOverloads constructor(
                     ball.speed.y *= -1
                 }
 
+
+
 /*
                 // Version JAVI S.
 
