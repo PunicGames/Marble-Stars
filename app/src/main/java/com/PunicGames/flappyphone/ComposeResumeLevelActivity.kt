@@ -260,7 +260,7 @@ class ComposeResumeLevelActivity : ComponentActivity() {
                     Image(
                         painter = painterResource(id = R.drawable.level_resume),
                         contentDescription = "Logo",
-                        contentScale = ContentScale.FillWidth,
+                        contentScale = ContentScale.Fit,
                         modifier = Modifier.fillMaxSize()
                     )
 
@@ -292,7 +292,7 @@ class ComposeResumeLevelActivity : ComponentActivity() {
                         Image(
                             painter = painterResource(id = R.drawable.estrella),
                             contentDescription = "Star",
-                            contentScale = ContentScale.FillWidth,
+                            contentScale = ContentScale.Fit,
                             modifier = Modifier.fillMaxSize(),
                             alpha = star1Alpha
                         )
@@ -309,7 +309,7 @@ class ComposeResumeLevelActivity : ComponentActivity() {
                         Image(
                             painter = painterResource(id = R.drawable.estrella),
                             contentDescription = "Star",
-                            contentScale = ContentScale.FillWidth,
+                            contentScale = ContentScale.Fit,
                             modifier = Modifier.fillMaxSize(),
                             alpha = star2Alpha
                         )
@@ -326,7 +326,7 @@ class ComposeResumeLevelActivity : ComponentActivity() {
                         Image(
                             painter = painterResource(id = R.drawable.estrella),
                             contentDescription = "Star",
-                            contentScale = ContentScale.FillWidth,
+                            contentScale = ContentScale.Fit,
                             modifier = Modifier.fillMaxSize(),
                             alpha = star3Alpha
                         )
@@ -343,7 +343,7 @@ class ComposeResumeLevelActivity : ComponentActivity() {
                         Image(
                             painter = painterResource(id = R.drawable.estrella),
                             contentDescription = "Star",
-                            contentScale = ContentScale.FillWidth,
+                            contentScale = ContentScale.Fit,
                             modifier = Modifier.fillMaxSize(),
                             alpha = star4Alpha
                         )
